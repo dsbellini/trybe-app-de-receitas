@@ -1,5 +1,6 @@
 import { createContext } from 'react';
 
+// Definindo o tipo do context
 type LoginContextType = {
   formData: { email: string; password: string };
   handleInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
