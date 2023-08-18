@@ -24,6 +24,7 @@ function Login() {
           name="password"
         />
         <Button
+          variant="success"
           type="submit"
           data-testid="login-submit-btn"
           disabled={ !isFormValid() }
