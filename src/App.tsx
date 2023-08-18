@@ -3,12 +3,15 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Route, Routes } from 'react-router-dom';
 import Login from './components/Login';
+import LoginProvider from './context/LoginProvider';
 
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={ <Login /> } />
-    </Routes>
+    <LoginProvider>
+      <Routes>
+        <Route path="/" element={ <Login /> } />
+      </Routes>
+    </LoginProvider>
   );
 }
 
