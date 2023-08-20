@@ -5,11 +5,15 @@ import { Route, Routes } from 'react-router-dom';
 import Login from './components/Login';
 import SearchBar from './components/SearchBar';
 import Header from './components';
+import LoginProvider from './context/LoginProvider';
+import Profile from './components/Profile';
 
 function App() {
   return (
+    <LoginProvider>
     <Routes>
       <Route path="/" element={ <Login /> } />
+      <Route path="/profile" element={ <Profile /> } />
       <Route path="/SearchBar" element={ <SearchBar /> } />
       <Route path="/meals" element={ <Header pageTitle="Meals" /> } />
       <Route path="/drinks" element={ <Header pageTitle="Drinks" /> } />
@@ -36,7 +40,8 @@ function App() {
         element={ <Header pageTitle="Favorite Recipes" searchIcon={ false } /> }
       />
     </Routes>
-  );
-}
+    </LoginProvider>
+    );
+};
 
 export default App;
