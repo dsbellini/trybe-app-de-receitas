@@ -1,6 +1,5 @@
 import { screen } from '@testing-library/react';
 import renderWithRouter from './renderWithRouter';
-import App from '../App';
 import Profile from '../components/Profile';
 
 describe('Testa a página de Perfil', () => {
