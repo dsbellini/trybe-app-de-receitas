@@ -1,5 +1,6 @@
 import { Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import Header from './Header';
 
 function Profile() {
   const userMail = JSON.parse(localStorage.getItem('user') || '{}').email;
@@ -12,7 +13,7 @@ function Profile() {
 
   return (
     <>
-      <h1>Profile</h1>
+      <Header pageTitle="Profile" searchIcon={ false } />
       <h2
         data-testid="profile-email"
       >
