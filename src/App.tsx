@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
+// import 'bootstrap/dist/css/bootstrap.min.css'; // Está gerando erro no teste da pagina RecipeInProgress - favor deixar desativado ! //
 import { Route, Routes } from 'react-router-dom';
 import Login from './components/Login';
 import SearchBar from './components/SearchBar';
@@ -10,6 +10,7 @@ import { Scope } from './exportTypes/types';
 import Revenues from './components/Recipes';
 import RevenuesDetails from './components/Revenue/RevenuesDetails';
 import Profile from './components/Profile';
+import RecipeInProgress from './components/RecipeInProgress/RecipeInProgress';
 
 function App() {
   return (
@@ -24,11 +25,11 @@ function App() {
         <Route path="/drinks/:recipeId" element={ <RevenuesDetails /> } />
         <Route
           path="/meals/:recipeId/in-progress"
-          element={ <h2>meal in progress</h2> }
+          element={ <RecipeInProgress /> }
         />
         <Route
           path="/drinks/:recipeId/in-progress"
-          element={ <h2>drink in progress</h2> }
+          element={ <RecipeInProgress /> }
         />
         <Route
           path="/done-recipes"
