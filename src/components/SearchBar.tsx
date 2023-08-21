@@ -21,7 +21,7 @@ export default function SearchI() {
 
   const handleClick = async () => {
     if (searchParams.type === 'f' && searchParams.term.length > 1) {
-      window.alert('you search must have only 1 (one) character');
+      window.alert('Your search must have only 1 (one) character');
       return;
     }
     let result = await ServiceFood(state.scope)
