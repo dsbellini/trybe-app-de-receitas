@@ -1,5 +1,5 @@
 import { createContext, useState } from 'react';
-import { ContextState, RevenueType } from './exportTypes/types';
+import { ContextState, RevenueType } from '../exportTypes/types';
 
 export const INITIAL_CONTEXT: RevenueType = {
   state: {

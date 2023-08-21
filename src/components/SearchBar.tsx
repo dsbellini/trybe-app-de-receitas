@@ -2,7 +2,7 @@ import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Revenue, SearchParams } from '../exportTypes/types';
 import { ServiceFood } from '../services';
-import { RevenueContext } from '../RevenuesContext';
+import { RevenueContext } from '../context/RevenuesContext';
 
 export default function SearchI() {
   const INITIAL_SEARCH: SearchParams = {

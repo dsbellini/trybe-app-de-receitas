@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import ProfileButton from './profileButton';
+import ProfileButton from './ProfileButton';
 import SearchButton from './SearchButton';
 import SearchI from './SearchBar';
 
