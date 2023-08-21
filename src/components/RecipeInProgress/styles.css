@@ -1,11 +1,12 @@
 body {
-    background-color: #505050;
+  background-color: #505050;
 }
+
 .checked {
-    display: inline-block;
-    text-decoration: line-through;
-};
+  display: inline-block;
+  text-decoration: line-through;
+}
 
 .not-checked {
-    text-decoration: none;
-};
+  text-decoration: none;
+}
