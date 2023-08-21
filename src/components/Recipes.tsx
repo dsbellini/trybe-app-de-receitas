@@ -1,8 +1,8 @@
-import { INITIAL_CONTEXT, RevenueProvider } from './RevenuesContext';
-import { capitalized } from './capitalized';
-import Header from './components';
-import { Scope } from './exportTypes/types';
-import RevenueList from './RevenuesList';
+import { INITIAL_CONTEXT, RevenueProvider } from '../context/RevenuesContext';
+import { capitalized } from '../capitalized';
+import Header from './Header';
+import { Scope } from '../exportTypes/types';
+import RevenueList from './Revenue/RevenuesList';
 
 export type RevenuesProps = {
   scope: Scope;

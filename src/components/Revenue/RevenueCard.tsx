@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Revenue } from './exportTypes/types';
-import { RevenueContext } from './RevenuesContext';
+import { Revenue } from '../../exportTypes/types';
+import { RevenueContext } from '../../context/RevenuesContext';
 import style from './RevenueCard.module.css';
 
 export type RevenueCardProps = {
