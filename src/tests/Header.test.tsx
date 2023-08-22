@@ -5,7 +5,7 @@ import App from '../App';
 
 test('Testar o Header conforme o que foi passado', () => {
   renderWithRouter(<App />, { initialEntries: ['/meals'] });
-  expect(screen.getByText('Meals')).toBeInTheDocument();
+  expect(screen.getByText('Revenues - Meals')).toBeInTheDocument();
   expect(screen.getByTestId('search-top-btn')).toBeInTheDocument();
 });
 

@@ -5,7 +5,7 @@ import App from '../App';
 
 describe('Testa a página de Login', () => {
   test('Verifica se a página contém inputs de email, senha e botão de entrar', () => {
-    renderWithRouter(<App />);
+    renderWithRouter(<App />, { route: '/' });
     const email = screen.getByTestId(/email-input/i);
     const senha = screen.getByTestId(/password-input/i);
     const botao = screen.getByTestId(/login-submit-btn/i);
@@ -15,7 +15,7 @@ describe('Testa a página de Login', () => {
   });
 
   test('Verifica se após inserir um email e senha válidos, o botão é habilitado', async () => {
-    renderWithRouter(<App />);
+    renderWithRouter(<App />, { route: '/' });
     const email = screen.getByTestId(/email-input/i);
     const senha = screen.getByTestId(/password-input/i);
     const botao = screen.getByTestId(/login-submit-btn/i);
