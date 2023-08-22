@@ -1,8 +1,8 @@
 {
   "extends": "@trybe/eslint-config-frontend/typescript",
-  "parserOptions": {
-    "project": "sd-032-a-project-recipes-app-ts/tsconfig.json"
-  },
+  // "parserOptions": {
+  //   "project": "sd-032-a-project-recipes-app-ts/tsconfig.json"
+  // },
   "rules": {
     "no-alert": "off"
   },

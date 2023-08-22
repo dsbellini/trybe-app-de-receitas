@@ -1,9 +1,9 @@
-import 'bootstrap/dist/css/bootstrap.css';
-import Carousel from 'react-bootstrap/Carousel';
+import Carousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { ServiceFood } from '../services';
-import { Scope, Revenue } from '../exportTypes/types';
+import { Scope, Revenue, RecommType } from '../exportTypes/types';
 import style from './RecipeDetails.module.css';
 
 export type RecipesProps = {
@@ -12,9 +12,9 @@ export type RecipesProps = {
 
 function RecipeDetails({ scope }: RecipesProps) {
   const { recipeId } = useParams<{ recipeId: string }>();
-  const [recipe, setRecipe] = useState<Revenue | null>(null);
+  const [recipe, setRecipe] = useState<Revenue>();
   const [ingAndMea, setIngAndMea] = useState<string[]>([]);
-  const [recomm, setRecomm] = useState<Revenue[][] | undefined>();
+  const [recomm, setRecomm] = useState<Revenue[]>([]);
 
   useEffect(() => {
     const getRecipe = async () => {
@@ -38,26 +38,26 @@ function RecipeDetails({ scope }: RecipesProps) {
     };
 
     const getRecommendation = async () => {
-      const data = await ServiceFood(scope).recommendation();
+      const data = await ServiceFood(scope).recommendation() as unknown as RecommType;
       if (scope === 'meals') {
-        const r = data?.drinks.filter((e, i) => i < 6);
-        if (typeof r !== 'undefined') {
-          const groupRecomm = [[r[0], r[1]], [r[2], r[3]], [r[4], r[5]]];
-          setRecomm(groupRecomm);
-          console.log(groupRecomm);
-        }
+        const r = data.drinks.filter((e, i) => i < 6);
+
+        setRecomm(r);
       } else {
-        const r = data?.meals.filter((e, i) => i < 6);
-        if (typeof r !== 'undefined') {
-          const groupRecomm = [[r[0], r[1]], [r[2], r[3]], [r[4], r[5]]];
-          setRecomm(groupRecomm);
-          console.log(groupRecomm);
-        }
+        const r = data.meals.filter((e, i) => i < 6);
+        setRecomm(r);
       }
     };
     getRecommendation();
     getRecipe();
   }, []);
+
+  const responsive = {
+    mobile: {
+      breakpoint: { max: 3000, min: 0 },
+      items: 2,
+    },
+  };
 
   return (
     <>
@@ -95,32 +95,25 @@ function RecipeDetails({ scope }: RecipesProps) {
         : null }
 
       <div>
-        <Carousel>
-          { recomm?.map((e, i) => (
-            <Carousel.Item key={ i } data-testid={ `${i}-recommendation-card` }>
+        <Carousel responsive={ responsive }>
+          { recomm.map((element, index) => (
+            <span
+              data-testid={ `${index}-recommendation-card` }
+              key={ element.idMeal || element.idDrink }
+            >
               <img
-                src={ e[0].strMealThumb || e[0].strDrinkThumb }
-                alt=""
+                src={ element.strDrinkThumb
+              || element.strMealThumb }
+                alt={ element.strMeal
+              || element.strDrink }
               />
-              <img
-                src={ e[1].strMealThumb || e[1].strDrinkThumb }
-                alt=""
-              />
-              <Carousel.Caption>
-                <h3
-                  data-testid={ `${i}-recommendation-title` }
-                >
-                  { e[0].strMeal || e[0].strDrink }
-                </h3>
-                <h3
-                  data-testid={ `${i}-recommendation-title` }
-                >
-                  { e[1].strMeal || e[1].strDrink }
-                </h3>
-              </Carousel.Caption>
-            </Carousel.Item>
-          )) }
-
+              <p
+                data-testid={ `${index}-recommendation-title` }
+              >
+                { element.strMeal || element.strDrink}
+              </p>
+            </span>
+          ))}
         </Carousel>
       </div>
 
