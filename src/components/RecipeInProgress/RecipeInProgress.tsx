@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react';
 import './styles.css';
+import { useNavigate } from 'react-router-dom';
 import shareIcon from '../../images/shareIcon.svg';
 import whiteHeart from '../../images/whiteHeartIcon.svg';
 // import blackHeart from '../../images/blackHeartIcon.svg';
@@ -28,6 +29,7 @@ function RecipeInProgress() {
   const [checkedItems, setCheckedItems] = useState(Array(ingredients.length).fill(false));
   const [disabledButton, setDisabledButton] = useState(true);
   const [copySuccess, setCopySuccess] = useState(false);
+  const nav = useNavigate();
 
   // Função para recuperar o estado dos ingredientes salvos no localStorage
   useEffect(() => {
@@ -70,6 +72,23 @@ function RecipeInProgress() {
       setCopySuccess(true);
       setTimeout(() => setCopySuccess(false), 3000); // Remove a mensagem após 3 segundos
     });
+  };
+
+  // Função para finalizar a receita e salvar no localStorage - aguardando a página anterior ficar pronta para finalizar
+  const handleFinishClick = () => {
+    const doneRecipes = [{
+      id: '52940',
+      type: 'meal',
+      nationality: '',
+      category: '',
+      alcoholicOrNot: '',
+      name: 'nome da receita',
+      image: 'imagem da receita',
+      doneDate: 'data da receita concluída',
+      tags: [],
+    }];
+    localStorage.setItem('doneRecipes', JSON.stringify([...doneRecipes]));
+    nav('/done-recipes');
   };
 
   return (
@@ -135,6 +154,7 @@ function RecipeInProgress() {
       <button
         data-testid="finish-recipe-btn"
         disabled={ disabledButton }
+        onClick={ handleFinishClick }
 
       >
         Finalizar Receita
