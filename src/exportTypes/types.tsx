@@ -14,6 +14,7 @@ export type SearchParams = {
 };
 
 export type Scope = 'meals' | 'drinks';
+
 export type ContextState = {
   scope: Scope;
   searchParams: SearchParams;
@@ -23,6 +24,11 @@ export type ContextState = {
 export type RevenueType = {
   state: ContextState;
   update: (data: Partial<ContextState>) => void;
+};
+
+export type RecommType = {
+  drinks: Revenue[];
+  meals: Revenue[];
 };
 
 export type Revenue = {
