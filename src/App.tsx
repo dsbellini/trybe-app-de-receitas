@@ -8,7 +8,7 @@ import Header from './components/Header';
 import LoginProvider from './context/LoginProvider';
 import { Scope } from './exportTypes/types';
 import Revenues from './components/Recipes';
-import RevenuesDetails from './components/Revenue/RevenuesDetails';
+import RecipeDetails from './components/RecipeDetails';
 import Profile from './components/Profile';
 
 function App() {
@@ -20,8 +20,18 @@ function App() {
         <Route path="/SearchBar" element={ <SearchBar /> } />
         <Route path="/meals" element={ <Revenues scope={ 'meals' as Scope } /> } />
         <Route path="/drinks" element={ <Revenues scope={ 'drinks' as Scope } /> } />
-        <Route path="/meals/:recipeId" element={ <RevenuesDetails /> } />
-        <Route path="/drinks/:recipeId" element={ <RevenuesDetails /> } />
+        <Route
+          path="/meals/:recipeId"
+          element={ <RecipeDetails
+            scope={ 'meals' as Scope }
+          /> }
+        />
+        <Route
+          path="/drinks/:recipeId"
+          element={ <RecipeDetails
+            scope={ 'drinks' as Scope }
+          /> }
+        />
         <Route
           path="/meals/:recipeId/in-progress"
           element={ <h2>meal in progress</h2> }
