@@ -3,7 +3,7 @@ import { capitalized } from '../capitalized';
 import Header from './Header';
 import { Scope } from '../exportTypes/types';
 import RevenueList from './Revenue/RevenuesList';
-import Recipes from '../pages/Recipes';
+import Recipes from '../pages/PagesRecipes';
 
 export type RevenuesProps = {
   scope: Scope;
