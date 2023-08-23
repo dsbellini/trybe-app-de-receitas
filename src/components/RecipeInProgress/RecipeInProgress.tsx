@@ -4,6 +4,7 @@ import './styles.css';
 import { useNavigate } from 'react-router-dom';
 import shareIcon from '../../images/shareIcon.svg';
 import whiteHeart from '../../images/whiteHeartIcon.svg';
+import { Revenue } from '../../exportTypes/types';
 // import blackHeart from '../../images/blackHeartIcon.svg';
 
 const steps = [
@@ -30,6 +31,14 @@ function RecipeInProgress() {
   const [disabledButton, setDisabledButton] = useState(true);
   const [copySuccess, setCopySuccess] = useState(false);
   const nav = useNavigate();
+
+  // test
+  const [recipe, setRecipe] = useState<Revenue>();
+  useEffect(() => {
+    setRecipe(JSON.parse(localStorage
+      .getItem('recipeInfo') || '[]'));
+    console.log(recipe);
+  }, []);
 
   // Função para recuperar o estado dos ingredientes salvos no localStorage
   useEffect(() => {
@@ -95,12 +104,14 @@ function RecipeInProgress() {
     <>
       <div>
         <img
-          src="caminho-da-imagem.jpg"
+          src={ recipe?.strDrinkThumb || recipe?.strMealThumb }
           data-testid="recipe-photo"
           alt="Foto da Receita"
+          width="300"
+          height="200"
         />
       </div>
-      <h1 data-testid="recipe-title">Título da Receita</h1>
+      <h1 data-testid="recipe-title">{recipe?.strDrink || recipe?.strMeal}</h1>
       {/* Share Button */}
       <button
         data-testid="share-btn"
@@ -115,7 +126,7 @@ function RecipeInProgress() {
       >
         <img src={ whiteHeart } alt="white-heart-icon" />
       </button>
-      <p data-testid="recipe-category">Categoria da Receita</p>
+      <p data-testid="recipe-category">category</p>
       {copySuccess && <p>Link copied!</p>}
       <div data-testid="instructions">
         <h2>Instruções</h2>
