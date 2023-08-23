@@ -29,13 +29,13 @@ function App() {
           path="/meals/:recipeId"
           element={ <RecipeDetails
             scope={ 'meals' as Scope }
-            /> }
+          /> }
         />
         <Route
           path="/drinks/:recipeId"
           element={ <RecipeDetails
             scope={ 'drinks' as Scope }
-            /> }
+          /> }
         />
         <Route
           path="/meals/:recipeId/in-progress"
