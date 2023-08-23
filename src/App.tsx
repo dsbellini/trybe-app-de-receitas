@@ -2,7 +2,7 @@ import './App.css';
 // import 'bootstrap/dist/css/bootstrap.min.css'; // Está gerando erro no teste da pagina RecipeInProgress - favor deixar desativado ! //
 import { Route, Routes } from 'react-router-dom';
 import Login from './components/Login';
-import Recipes from './pages/PagesRecipes';
+// import Recipes from './pages/PagesRecipes';
 import Footer from './components/Footer';
 import SearchBar from './components/SearchBar';
 import Header from './components/Header';

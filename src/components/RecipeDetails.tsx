@@ -102,11 +102,11 @@ function RecipeDetails({ scope }: RecipesProps) {
       }
     };
 
-    // const getRecommendation = async () => {
-    //   const data = await ServiceFood(scope).recommendation() as unknown as RecommType;
-    //   if (scope === 'meals') setRecomm(data.drinks.filter((e, i) => i < 6));
-    //   else setRecomm(data.meals.filter((e, i) => i < 6));
-    // };
+    const getRecommendation = async () => {
+      const data = await ServiceFood(scope).recommendation() as unknown as RecommType;
+      if (scope === 'meals') setRecomm(data.drinks.filter((e, i) => i < 6));
+      else setRecomm(data.meals.filter((e, i) => i < 6));
+    };
 
     // const getStateRecipe = () => {
     //   const progress = JSON.parse(localStorage
@@ -116,7 +116,7 @@ function RecipeDetails({ scope }: RecipesProps) {
     // };
 
     // getStateRecipe();
-    // getRecommendation();
+    getRecommendation();
     getRecipe();
   }, []);
 
