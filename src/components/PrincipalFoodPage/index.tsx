@@ -70,7 +70,7 @@ function PrincipalFoodPage() {
       </nav>
 
       {food.map((item, index) => (
-        index <= 12 && (
+        index < 12 && (
           <Link
             to={ `/meals/${item.idMeal}` }
             key={ item.idMeal }
