@@ -8,7 +8,7 @@ function Footer() {
     <footer
       data-testid="footer"
       style={ {
-        position: 'fixed',
+        // position: 'fixed',
         bottom: 0,
         width: '100%',
       } }

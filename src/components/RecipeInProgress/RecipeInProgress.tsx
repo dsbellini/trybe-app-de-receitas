@@ -3,10 +3,10 @@ import { useEffect, useState } from 'react';
 import './styles.css';
 import { useNavigate } from 'react-router-dom';
 import shareIcon from '../../images/shareIcon.svg';
-import whiteHeart from '../../images/whiteHeartIcon.svg';
-import { Revenue, Scope } from '../../exportTypes/types';
+import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
+import blackHeartIcon from '../../images/blackHeartIcon.svg';
+import { FavoriteType, Revenue, Scope } from '../../exportTypes/types';
 import { ServiceFood } from '../../services';
-// import blackHeart from '../../images/blackHeartIcon.svg';
 
 function RecipeInProgress() {
   const [ingredients, setIngredients] = useState<string[]>([]);
@@ -15,14 +15,14 @@ function RecipeInProgress() {
   const [copySuccess, setCopySuccess] = useState(false);
   const [recipe, setRecipe] = useState<Revenue | any>();
   const [ingAndMea, setIngAndMea] = useState<string[]>([]);
+  const [heartMark, setHeartMark] = useState(false);
   const nav = useNavigate();
   const paramId = window.location.pathname.split('/')[2];
-  const paramScope = window.location.pathname.split('/')[1] as Scope;
-  console.log(paramId, paramScope);
+  const scope = window.location.pathname.split('/')[1] as Scope;
 
   useEffect(() => {
     const getRecipe = async () => {
-      const data = await ServiceFood(paramScope).getById(paramId);
+      const data = await ServiceFood(scope).getById(paramId);
       setRecipe(data);
       // separa somente os ingredient do objeto
       const ingredient = Object.entries(data).filter((e) => {
@@ -37,13 +37,13 @@ function RecipeInProgress() {
       ingredient.forEach((e, i) => preparation.push(`${measure[i]} ${e}`));
       setIngAndMea(preparation);
       setIngredients(ingredient);
-      // if (localStorage.getItem('favoriteRecipes') !== null) {
-      //   const favorited = JSON.parse(localStorage
-      //     .getItem('favoriteRecipes') || '[]') as FavoriteType[];
-      //   const yesOrNo = favorited
-      //     .some((e) => e.id === (data?.idDrink || data?.idMeal));
-      //   setHearteMark(yesOrNo);
-      //   console.log(yesOrNo);
+      if (localStorage.getItem('favoriteRecipes') !== null) {
+        const favorited = JSON.parse(localStorage
+          .getItem('favoriteRecipes') || '[]') as FavoriteType[];
+        const yesOrNo = favorited
+          .some((e) => e.id === (data?.idDrink || data?.idMeal));
+        setHeartMark(yesOrNo);
+      }
     };
     getRecipe();
   }, []);
@@ -56,7 +56,7 @@ function RecipeInProgress() {
       const drinksInProgress = inProgressRecipes.drinks || {};
       const mealsInProgress = inProgressRecipes.meals || {};
 
-      const checkedItemsForRecipe = paramScope === 'drinks'
+      const checkedItemsForRecipe = scope === 'drinks'
         ? drinksInProgress[paramId] || []
         : mealsInProgress[paramId] || [];
 
@@ -78,8 +78,8 @@ function RecipeInProgress() {
 
     const updatedInProgressRecipes = {
       ...JSON.parse(localStorage.getItem('inProgressRecipes') || '{}'),
-      [paramScope]: {
-        ...JSON.parse(localStorage.getItem('inProgressRecipes') || '{}')[paramScope],
+      [scope]: {
+        ...JSON.parse(localStorage.getItem('inProgressRecipes') || '{}')[scope],
         [paramId]: newCheckedItems,
       },
     };
@@ -100,7 +100,7 @@ function RecipeInProgress() {
   const handleCopyLink = () => {
     const baseUrl = window.location.origin; // Obtém o domínio base do site
     const recipeId = paramId; // Substituir pelo ID da receita atual
-    const isMeal = paramScope === 'meals'; // Substituir pelo valor correto (true para receita de comida, false para bebida)
+    const isMeal = scope === 'meals'; // Substituir pelo valor correto (true para receita de comida, false para bebida)
     const recipeLink = `${baseUrl}/${isMeal ? 'meals' : 'drinks'}/${recipeId}`; // Gerar o link da receita
 
     navigator.clipboard.writeText(recipeLink).then(() => {
@@ -109,18 +109,58 @@ function RecipeInProgress() {
     });
   };
 
+  const checkFavorite = () => {
+    if (localStorage.getItem('favoriteRecipes') !== null) {
+      const favorited = JSON.parse(localStorage
+        .getItem('favoriteRecipes') || '[]') as FavoriteType[];
+      const yesOrNo = favorited.some((e) => e.id === (recipe?.idDrink || recipe?.idMeal));
+      setHeartMark(yesOrNo);
+    }
+  };
+
+  const handleFavorite = () => {
+    const favoriteRecipe = {
+      id: recipe?.idDrink || recipe?.idMeal,
+      type: scope.slice(0, -1),
+      nationality: recipe?.strArea || '',
+      category: recipe?.strCategory,
+      alcoholicOrNot: recipe?.strAlcoholic || '',
+      name: recipe?.strDrink || recipe?.strMeal,
+      image: recipe?.strDrinkThumb || recipe?.strMealThumb,
+    } as FavoriteType;
+    if (localStorage.getItem('favoriteRecipes') !== null) {
+      const favorited = JSON.parse(localStorage
+        .getItem('favoriteRecipes') || '[]') as FavoriteType[];
+      const yesOrNo = favorited.some((e) => e.id === (recipe?.idDrink || recipe?.idMeal));
+      if (!yesOrNo) {
+        localStorage
+          .setItem('favoriteRecipes', JSON.stringify([...favorited, favoriteRecipe]));
+      } else {
+        const removeRecipe = favorited
+          .filter((e) => e.id !== (recipe?.idDrink || recipe?.idMeal));
+        localStorage
+          .setItem('favoriteRecipes', JSON.stringify(removeRecipe));
+      }
+    } else {
+      localStorage
+        .setItem('favoriteRecipes', JSON.stringify([favoriteRecipe]));
+    }
+    checkFavorite();
+  };
+
   // Função para finalizar a receita e salvar no localStorage - aguardando a página anterior ficar pronta para finalizar
   const handleFinishClick = () => {
+    const date = new Date();
     const doneRecipes = [{
-      id: '52940',
-      type: 'meal',
-      nationality: '',
-      category: '',
-      alcoholicOrNot: '',
-      name: 'nome da receita',
-      image: 'imagem da receita',
-      doneDate: 'data da receita concluída',
-      tags: [],
+      id: recipe?.idDrink || recipe?.idMeal,
+      nationality: recipe?.strArea || '',
+      name: recipe?.strDrink || recipe?.strMeal,
+      category: recipe?.strCategory,
+      image: recipe?.strDrinkThumb || recipe?.strMealThumb,
+      tags: recipe?.strTags ? recipe?.strTags.split(',') : [],
+      alcoholicOrNot: recipe?.strAlcoholic || '',
+      type: scope.slice(0, -1),
+      doneDate: date,
     }];
     localStorage.setItem('doneRecipes', JSON.stringify([...doneRecipes]));
     nav('/done-recipes');
@@ -148,9 +188,11 @@ function RecipeInProgress() {
       </button>
       {/* Favorite Button */}
       <button
-        data-testid="favorite-btn"
+        onClick={ handleFavorite }
       >
-        <img src={ whiteHeart } alt="white-heart-icon" />
+        { heartMark
+          ? <img src={ blackHeartIcon } alt="black" data-testid="favorite-btn" />
+          : <img src={ whiteHeartIcon } alt="white" data-testid="favorite-btn" />}
       </button>
       <p data-testid="recipe-category">{recipe?.strCategory}</p>
       {copySuccess && <p>Link copied!</p>}
