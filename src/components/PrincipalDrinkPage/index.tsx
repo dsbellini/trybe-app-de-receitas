@@ -51,17 +51,21 @@ function PrincipalDrinkPage() {
         {category.map((item, index) => (
           index < 5 && (
             <button
-              key={index}
-              value={item.strCategory}
-              onClick={() => handleCategoryFilter(item.strCategory)}
-              data-testid={`${item.strCategory}-category-filter`}
+              key={ index }
+              value={ item.strCategory }
+              onClick={ () => handleCategoryFilter(item.strCategory) }
+              data-testid={ `${item.strCategory}-category-filter` }
             >
               {item.strCategory}
             </button>
           )
         ))}
 
-        <button onClick={() => handleCategoryFilter('')} data-testid="All-category-filter">
+        <button
+          onClick={ () => handleCategoryFilter('') }
+          data-testid="All-category-filter"
+        >
+          {' '}
           {filterActive ? 'All' : 'Limpar Filtro'}
         </button>
       </nav>
@@ -69,16 +73,16 @@ function PrincipalDrinkPage() {
       {drink.map((item, index) => (
         index < 12 && (
           <Link
-            to={`/drinks/${item.idDrink}`} // Redireciona para a rota de detalhes de bebidas com o ID
-            key={item.idDrink}
+            to={ `/drinks/${item.idDrink}` }
+            key={ item.idDrink }
           >
-            <div data-testid={`${index}-recipe-card`}>
+            <div data-testid={ `${index}-recipe-card` }>
               <img
-                src={item.strDrinkThumb}
-                alt={item.strDrink}
-                data-testid={`${index}-card-img`}
+                src={ item.strDrinkThumb }
+                alt={ item.strDrink }
+                data-testid={ `${index}-card-img` }
               />
-              <h2 data-testid={`${index}-card-name`}>{item.strDrink}</h2>
+              <h2 data-testid={ `${index}-card-name` }>{item.strDrink}</h2>
             </div>
           </Link>
         )
