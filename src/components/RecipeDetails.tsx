@@ -3,7 +3,10 @@ import 'react-multi-carousel/lib/styles.css';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { ServiceFood } from '../services';
-import { Scope, Revenue, RecommType } from '../exportTypes/types';
+import { Scope, Revenue, RecommType, FavoriteType } from '../exportTypes/types';
+import shareIcon from '../images/shareIcon.svg';
+import whiteHeart from '../images/whiteHeartIcon.svg';
+import blackHeart from '../images/blackHeartIcon.svg';
 import style from './RecipeDetails.module.css';
 
 export type RecipesProps = {
@@ -15,14 +18,62 @@ function RecipeDetails({ scope }: RecipesProps) {
   const [recipe, setRecipe] = useState<Revenue>();
   const [ingAndMea, setIngAndMea] = useState<string[]>([]);
   const [recomm, setRecomm] = useState<Revenue[]>([]);
+  const [stateRecipe, setStateRecipe] = useState();
+  const [copySuccess, setCopySuccess] = useState(false);
+  const [hearteMark, setHearteMark] = useState(false);
 
   const navigate = useNavigate();
-  const startRecipe = async () => {
+  const startRecipe = () => {
     if (recipe) {
-      await localStorage.setItem('recipeInfo', JSON.stringify([]));
-      await localStorage.setItem('recipeInfo', JSON.stringify(recipe));
+      localStorage.setItem('recipeInfo', JSON.stringify([]));
+      localStorage.setItem('recipeInfo', JSON.stringify(recipe));
       navigate(`/${scope}/${recipe.idMeal || recipe.idDrink}/in-progress`);
     }
+  };
+
+  const handleCopyLink = () => {
+    const baseUrl = window.location.origin; // Obtém o domínio base do site
+    const recipeLink = `${baseUrl}/${scope}/${recipe?.idDrink || recipe?.idMeal}`; // Gerar o link da receita
+
+    navigator.clipboard.writeText(recipeLink).then(() => {
+      setCopySuccess(true);
+      setTimeout(() => setCopySuccess(false), 3000); // Remove a mensagem após 3 segundos
+    });
+  };
+
+  const checkFavorite = () => {
+    if (localStorage.getItem('favoriteRecipes') !== null) {
+      const favorited = JSON.parse(localStorage
+        .getItem('favoriteRecipes') || '[]') as FavoriteType[];
+      const yesOrNo = favorited.some((e) => e.id === (recipe?.idDrink || recipe?.idMeal));
+      setHearteMark(yesOrNo);
+      console.log(yesOrNo);
+    }
+  };
+
+  const handleFavorite = () => {
+    const favoriteRecipe = {
+      id: recipe?.idDrink || recipe?.idMeal,
+      type: scope.slice(0, -1),
+      nationality: recipe?.strArea || '',
+      category: recipe?.strCategory,
+      alcoholicOrNot: recipe?.strAlcoholic || '',
+      name: recipe?.strDrink || recipe?.strMeal,
+      image: recipe?.strDrinkThumb || recipe?.strMealThumb,
+    } as FavoriteType;
+    if (localStorage.getItem('favoriteRecipes') !== null) {
+      const favorited = JSON.parse(localStorage
+        .getItem('favoriteRecipes') || '[]') as FavoriteType[];
+      const yesOrNo = favorited.some((e) => e.id === (recipe?.idDrink || recipe?.idMeal));
+      if (!yesOrNo) {
+        localStorage
+          .setItem('favoriteRecipes', JSON.stringify([...favorited, favoriteRecipe]));
+      }
+    } else {
+      localStorage
+        .setItem('favoriteRecipes', JSON.stringify([favoriteRecipe]));
+    }
+    checkFavorite();
   };
 
   useEffect(() => {
@@ -30,21 +81,25 @@ function RecipeDetails({ scope }: RecipesProps) {
       const data = await ServiceFood(scope).getById(recipeId);
       setRecipe(data);
       // separa somente os ingredient do objeto
-      const objIng = Object.entries(data);
-      const ing = objIng.filter((e) => {
+      const ingredient = Object.entries(data).filter((e) => {
         return e[0].indexOf('strIngredient') > -1 && typeof e[1] === 'string';
-      });
-      const ingredient = ing.map((e) => e[1]).filter((e) => e !== '');
+      }).map((e) => e[1]).filter((e) => e !== '');
       // separa somente os measure do objeto
-      const objMea = Object.entries(data);
-      const mea = objMea.filter((e) => {
+      const measure = Object.entries(data).filter((e) => {
         return e[0].indexOf('strMeasure') > -1 && typeof e[1] === 'string';
-      });
-      const measure = mea.map((e) => e[1]).filter((e) => e !== '');
+      }).map((e) => e[1]).filter((e) => e !== '');
       // junta ingredient e measure em uma array
       const preparation = [] as string[];
       ingredient.forEach((e, i) => preparation.push(`${measure[i]} ${e}`));
       setIngAndMea(preparation);
+      if (localStorage.getItem('favoriteRecipes') !== null) {
+        const favorited = JSON.parse(localStorage
+          .getItem('favoriteRecipes') || '[]') as FavoriteType[];
+        const yesOrNo = favorited
+          .some((e) => e.id === (data?.idDrink || data?.idMeal));
+        setHearteMark(yesOrNo);
+        console.log(yesOrNo);
+      }
     };
 
     const getRecommendation = async () => {
@@ -53,6 +108,14 @@ function RecipeDetails({ scope }: RecipesProps) {
       else setRecomm(data.meals.filter((e, i) => i < 6));
     };
 
+    const getStateRecipe = () => {
+      const progress = JSON.parse(localStorage
+        .getItem('inProgressRecipes') || '[]') as [];
+      const state = progress.find((e) => e === true);
+      console.log(state);
+    };
+
+    getStateRecipe();
     getRecommendation();
     getRecipe();
   }, []);
@@ -134,6 +197,22 @@ function RecipeDetails({ scope }: RecipesProps) {
         </button>
       </div>
 
+      <div>
+        { copySuccess === true ? <p>Link copied!</p> : null }
+        <button
+          data-testid="share-btn"
+          onClick={ handleCopyLink }
+        >
+          <img src={ shareIcon } alt="share-icon" />
+        </button>
+        <button
+          onClick={ handleFavorite }
+        >
+          { hearteMark
+            ? <img src={ blackHeart } alt="black" data-testid="favorite-btn" />
+            : <img src={ whiteHeart } alt="white" data-testid="favorite-btn" />}
+        </button>
+      </div>
     </>
   );
 }

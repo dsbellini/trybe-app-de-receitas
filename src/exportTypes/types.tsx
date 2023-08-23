@@ -31,6 +31,16 @@ export type RecommType = {
   meals: Revenue[];
 };
 
+export type FavoriteType = {
+  id: string;
+  type: string;
+  nationality: string;
+  category: string;
+  alcoholicOrNot: string;
+  name: string;
+  image: string;
+};
+
 export type Revenue = {
   idMeal: string;
   idDrink: string;
