@@ -64,6 +64,8 @@ function RecipeInProgress() {
     }
   }, []);
 
+  // Comentario de teste
+
   // Função para chamar a função de desabilitar botão
   useEffect(() => {
     handleDisabledButton();
