@@ -6,6 +6,7 @@
     "node": "16 || 18"
   },
   "dependencies": {
+    "axios": "^1.4.0",
     "bootstrap": "^5.2.3",
     "history": "^5.3.0",
     "prop-types": "^15.8.1",
@@ -13,8 +14,9 @@
     "react-bootstrap": "^2.7.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.7.1",
+    "react-router-dom": "^6.10.0",
+    "react-svg": "^16.1.22"
     "react-multi-carousel": "^2.8.4",
-    "react-router-dom": "^6.10.0"
   },
   "scripts": {
     "cy": "env CY_CLI=true cypress run",
@@ -63,7 +65,7 @@
     "stylelint": "^14.16.1",
     "stylelint-order": "^5.0.0",
     "typescript": "^5.0.4",
-    "vite": "^4.1.1",
+    "vite": "^4.4.9",
     "vitest": "^0.30.1"
   }
 }

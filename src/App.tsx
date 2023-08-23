@@ -1,8 +1,9 @@
-import React from 'react';
 import './App.css';
 // import 'bootstrap/dist/css/bootstrap.min.css'; // Está gerando erro no teste da pagina RecipeInProgress - favor deixar desativado ! //
 import { Route, Routes } from 'react-router-dom';
 import Login from './components/Login';
+import Recipes from './pages/Recipes';
+import Footer from './components/Footer'; 
 import SearchBar from './components/SearchBar';
 import Header from './components/Header';
 import LoginProvider from './context/LoginProvider';
@@ -17,6 +18,9 @@ function App() {
     <LoginProvider>
       <Routes>
         <Route path="/" element={ <Login /> } />
+        <Route path="/*" element={<Footer />} />
+<!--         <Route path="/meals" element={ <Recipes /> } />
+        <Route path="/drinks" element={ <Recipes /> } /> -->
         <Route path="/profile" element={ <Profile /> } />
         <Route path="/SearchBar" element={ <SearchBar /> } />
         <Route path="/meals" element={ <Revenues scope={ 'meals' as Scope } /> } />
