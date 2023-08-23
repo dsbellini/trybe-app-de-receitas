@@ -1,0 +1,13 @@
+.btnRecipe {
+  position: fixed;
+  bottom: 0px;
+  border-color: black;
+}
+
+.absolute {
+  position: absolute;
+  height: 50px;
+  width: 120px;
+  top: 35px;
+  right: 32px;
+}

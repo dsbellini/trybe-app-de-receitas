@@ -1,0 +1,178 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useEffect, useState } from 'react';
+import './styles.css';
+import { useNavigate } from 'react-router-dom';
+import shareIcon from '../../images/shareIcon.svg';
+import whiteHeart from '../../images/whiteHeartIcon.svg';
+import { Revenue } from '../../exportTypes/types';
+// import blackHeart from '../../images/blackHeartIcon.svg';
+
+const steps = [
+  'Misture os ingredientes secos em uma tigela.',
+  'Adicione os ingredientes líquidos e mexa bem.',
+  'Despeje a massa em uma forma untada.',
+  'Asse no forno a 180°C por 30 minutos.',
+  'Retire do forno e deixe esfriar antes de servir.',
+];
+
+const ingredients = [
+  'Farinha de trigo',
+  'Açúcar',
+  'Ovos',
+  'Leite',
+  'Fermento em pó',
+  'Xablau',
+  'Fermento em ps',
+  'Fermento em ps',
+];
+
+function RecipeInProgress() {
+  const [checkedItems, setCheckedItems] = useState(Array(ingredients.length).fill(false));
+  const [disabledButton, setDisabledButton] = useState(true);
+  const [copySuccess, setCopySuccess] = useState(false);
+  const nav = useNavigate();
+
+  // test
+  const [recipe, setRecipe] = useState<Revenue>();
+  useEffect(() => {
+    setRecipe(JSON.parse(localStorage
+      .getItem('recipeInfo') || '[]'));
+    console.log(recipe);
+  }, []);
+
+  // Função para recuperar o estado dos ingredientes salvos no localStorage
+  useEffect(() => {
+    const inProgressRecipes = JSON.parse(localStorage
+      .getItem('inProgressRecipes') || '[]');
+    if (inProgressRecipes) {
+      setCheckedItems(inProgressRecipes);
+    }
+  }, []);
+
+  // Função para chamar a função de desabilitar botão
+  useEffect(() => {
+    handleDisabledButton();
+  }, [checkedItems]);
+
+  const handleClick = (index: any) => {
+    const newCheckedItems: boolean[] = [...checkedItems];
+    newCheckedItems[index] = !newCheckedItems[index];
+    setCheckedItems(newCheckedItems);
+    localStorage.setItem('inProgressRecipes', JSON.stringify(newCheckedItems));
+  };
+
+  const handleDisabledButton = () => {
+    const checked = checkedItems.filter((item) => item === true);
+    if (checked.length === ingredients.length) {
+      setDisabledButton(false);
+    } else {
+      setDisabledButton(true);
+    }
+  };
+
+  // Função para copiar o link da receita ao clicar no botão share/compartilhar
+  const handleCopyLink = () => {
+    const baseUrl = window.location.origin; // Obtém o domínio base do site
+    const recipeId = '52771'; // Substituir pelo ID da receita atual
+    const isMeal = true; // Substituir pelo valor correto (true para receita de comida, false para bebida)
+    const recipeLink = `${baseUrl}/${isMeal ? 'meals' : 'drinks'}/${recipeId}`; // Gerar o link da receita
+
+    navigator.clipboard.writeText(recipeLink).then(() => {
+      setCopySuccess(true);
+      setTimeout(() => setCopySuccess(false), 3000); // Remove a mensagem após 3 segundos
+    });
+  };
+
+  // Função para finalizar a receita e salvar no localStorage - aguardando a página anterior ficar pronta para finalizar
+  const handleFinishClick = () => {
+    const doneRecipes = [{
+      id: '52940',
+      type: 'meal',
+      nationality: '',
+      category: '',
+      alcoholicOrNot: '',
+      name: 'nome da receita',
+      image: 'imagem da receita',
+      doneDate: 'data da receita concluída',
+      tags: [],
+    }];
+    localStorage.setItem('doneRecipes', JSON.stringify([...doneRecipes]));
+    nav('/done-recipes');
+  };
+
+  return (
+    <>
+      <div>
+        <img
+          src={ recipe?.strDrinkThumb || recipe?.strMealThumb }
+          data-testid="recipe-photo"
+          alt="Foto da Receita"
+          width="300"
+          height="200"
+        />
+      </div>
+      <h1 data-testid="recipe-title">{recipe?.strDrink || recipe?.strMeal}</h1>
+      {/* Share Button */}
+      <button
+        data-testid="share-btn"
+        onClick={ handleCopyLink }
+      >
+        <img src={ shareIcon } alt="share-icon" />
+
+      </button>
+      {/* Favorite Button */}
+      <button
+        data-testid="favorite-btn"
+      >
+        <img src={ whiteHeart } alt="white-heart-icon" />
+      </button>
+      <p data-testid="recipe-category">category</p>
+      {copySuccess && <p>Link copied!</p>}
+      <div data-testid="instructions">
+        <h2>Instruções</h2>
+        <ul>
+          {steps.map((step, index) => (
+            <li key={ index }>{step}</li>
+          ))}
+        </ul>
+      </div>
+      <div data-testid="ingredients">
+        <h2>Ingredientes</h2>
+        <ul>
+          {ingredients.map((ingredient, index) => (
+            <li
+              key={ index }
+            >
+              <label
+                data-testid={ `${index}-ingredient-step` }
+                htmlFor={ ingredient }
+                className={ `${checkedItems[index] ? 'checked' : 'not-checked'}` }
+              >
+                <input
+                  onChange={ () => handleClick(index) }
+                  type="checkbox"
+                  name={ `ingredient${index}` }
+                  value={ ingredient }
+                  id={ ingredient }
+                  checked={ checkedItems[index] }
+                />
+                {ingredient}
+              </label>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <button
+        data-testid="finish-recipe-btn"
+        disabled={ disabledButton }
+        onClick={ handleFinishClick }
+
+      >
+        Finalizar Receita
+
+      </button>
+    </>
+  );
+}
+
+export default RecipeInProgress;
