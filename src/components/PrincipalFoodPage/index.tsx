@@ -45,23 +45,26 @@ function PrincipalFoodPage() {
 
   return (
     <div>
-      <h1>{isDrinkPage ? 'Receitas de bebidas' : 'Receitas de comidas'}</h1> 
+      <h1>{isDrinkPage ? 'Receitas de bebidas' : 'Receitas de comidas'}</h1>
 
       <nav>
         {category.map((item, index) => (
           index < 5 && (
             <button
-              key={index}
-              value={item.strCategory}
-              onClick={() => handleCategoryFilter(item.strCategory)}
-              data-testid={`${item.strCategory}-category-filter`}
+              key={ index }
+              value={ item.strCategory }
+              onClick={ () => handleCategoryFilter(item.strCategory) }
+              data-testid={ `${item.strCategory}-category-filter` }
             >
               {item.strCategory}
             </button>
           )
         ))}
 
-        <button onClick={() => handleCategoryFilter('')} data-testid="All-category-filter"> 
+        <button
+          onClick={ () => handleCategoryFilter('') }
+          data-testid="All-category-filter"
+        >
           {filterActive ? 'All' : 'Limpar Filtro'}
         </button>
       </nav>
@@ -69,16 +72,16 @@ function PrincipalFoodPage() {
       {food.map((item, index) => (
         index < 12 && (
           <Link
-            to={`/meals/${item.idMeal}`}
-            key={item.idMeal}
+            to={ `/meals/${item.idMeal}` }
+            key={ item.idMeal }
           >
-            <div data-testid={`${index}-recipe-card`}>
+            <div data-testid={ `${index}-recipe-card` }>
               <img
-                src={item.strMealThumb}
-                alt={item.strMeal}
-                data-testid={`${index}-card-img`}
+                src={ item.strMealThumb }
+                alt={ item.strMeal }
+                data-testid={ `${index}-card-img` }
               />
-              <h2 data-testid={`${index}-card-name`}>{item.strMeal}</h2>
+              <h2 data-testid={ `${index}-card-name` }>{item.strMeal}</h2>
             </div>
           </Link>
         )

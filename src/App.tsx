@@ -3,7 +3,7 @@ import './App.css';
 import { Route, Routes } from 'react-router-dom';
 import Login from './components/Login';
 import Recipes from './pages/Recipes';
-import Footer from './components/Footer'; 
+import Footer from './components/Footer';
 import SearchBar from './components/SearchBar';
 import Header from './components/Header';
 import LoginProvider from './context/LoginProvider';
@@ -18,13 +18,13 @@ function App() {
     <LoginProvider>
       <Routes>
         <Route path="/" element={ <Login /> } />
-        <Route path="/*" element={<Footer />} />
-<!--         <Route path="/meals" element={ <Recipes /> } />
-        <Route path="/drinks" element={ <Recipes /> } /> -->
-        <Route path="/profile" element={ <Profile /> } />
-        <Route path="/SearchBar" element={ <SearchBar /> } />
+        <Route path="/*" element={ <Footer /> } />
+        {/* <Route path="/meals" element={ <Recipes /> } />
+        <Route path="/drinks" element={ <Recipes /> } /> */}
         <Route path="/meals" element={ <Revenues scope={ 'meals' as Scope } /> } />
         <Route path="/drinks" element={ <Revenues scope={ 'drinks' as Scope } /> } />
+        <Route path="/profile" element={ <Profile /> } />
+        <Route path="/SearchBar" element={ <SearchBar /> } />
         <Route
           path="/meals/:recipeId"
           element={ <RecipeDetails
