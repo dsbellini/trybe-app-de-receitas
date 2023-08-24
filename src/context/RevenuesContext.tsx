@@ -14,10 +14,12 @@ export const INITIAL_CONTEXT: RevenueType = {
 };
 
 export const RevenueContext = createContext(INITIAL_CONTEXT);
+
 export function RevenueProvider({ value, children }: any) {
   const [innerState, setInnerState] = useState<RevenueType>(
     { ...INITIAL_CONTEXT, ...value },
   );
+
   const updateState = (data: Partial<ContextState>) => {
     setInnerState({
       ...innerState,
@@ -28,7 +30,11 @@ export function RevenueProvider({ value, children }: any) {
     });
   };
   return (
-    <RevenueContext.Provider value={ { ...innerState, update: updateState } }>
+    <RevenueContext.Provider
+      value={ {
+        ...innerState,
+        update: updateState } }
+    >
       {children}
     </RevenueContext.Provider>
   );
