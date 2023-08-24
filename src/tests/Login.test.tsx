@@ -3,24 +3,30 @@ import userEvent from '@testing-library/user-event';
 import { vi } from 'vitest';
 import renderWithRouter from './renderWithRouter';
 import App from '../App';
+import { mockDrink } from './mocks/mockMealsAndDrinks';
 // import { mockMeal, mockDrink } from './mocks/mockMealsAndDrinks';
 
 describe('Testa a página de Login', () => {
+  // beforeEach(() => {
+  //   const mockFetch = () => Promise.resolve({
+  //     json: () => Promise.resolve({}),
+  //   });
+
+  //   // vi.spyOn(global, 'fetch').mockImplementation(mockFetch as any);
+  //   global.fetch = mockFetch as any;
+  // });
+
+  // afterEach(() => {
+  //   vi.clearAllMocks();
+  // });
+
   beforeEach(() => {
-    const mockFetch = () => Promise.resolve({
-      json: () => Promise.resolve({}),
+    global.fetch = vi.fn().mockResolvedValue({
+      json: async () => ({ drinks: mockDrink.drinks }),
     });
-
-    // vi.spyOn(global, 'fetch').mockImplementation(mockFetch as any);
-    global.fetch = mockFetch as any;
-  });
-
-  afterEach(() => {
-    vi.clearAllMocks();
   });
 
   test('Verifica se a página contém inputs de email, senha e botão de entrar', () => {
-    // expect(global.fetch).toHaveBeenCalledTimes(0);
     renderWithRouter(<App />, { route: '/' });
     const email = screen.getByTestId(/email-input/i);
     const senha = screen.getByTestId(/password-input/i);
@@ -43,6 +49,11 @@ describe('Testa a página de Login', () => {
   });
 });
 
+// Mock para os valores retornados pelas APIs
+// const mealsData = { meals: mockMeal.meals };
+// const drinksData = { drinks: mockDrink.drinks };
+// const MEALS_URL = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
+// const DRINKS_URL = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
 // beforeEach(() => {
 //   // Mock para a função fetch
 //   const fetch = (url: string) => Promise.resolve({
