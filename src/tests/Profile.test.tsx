@@ -4,7 +4,7 @@ import { vi } from 'vitest';
 import renderWithRouter from './renderWithRouter';
 import Profile from '../components/Profile';
 import App from '../App';
-import { mockDrink, mockMeal } from './mocks/mockMealsAndDrinks';
+import { mockMeal } from './mocks/mockMealsAndDrinks';
 
 describe('Testa a página de Perfil', () => {
   beforeEach(() => {

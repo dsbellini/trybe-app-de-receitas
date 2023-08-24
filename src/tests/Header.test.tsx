@@ -3,14 +3,10 @@ import userEvent from '@testing-library/user-event';
 import { vi } from 'vitest';
 import { renderWithRouter } from './helper/renderWith';
 import App from '../App';
-import { mockDrink, mockMeal } from './mocks/mockMealsAndDrinks';
-
-const mealsData = { meals: mockMeal.meals };
-const drinksData = { drinks: mockDrink.drinks };
-const MEALS_URL = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
-const DRINKS_URL = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
+import { mockDrink } from './mocks/mockMealsAndDrinks';
 
 describe('Testes do Header', () => {
+  // ESSE MOCK NÃO FUNCIONOU:
   // beforeEach(() => {
   //   const fetch = (url: string) => Promise.resolve({
   //     status: 200,
@@ -35,6 +31,9 @@ describe('Testes do Header', () => {
   //     json: async () => ({ meals: mockMeal.meals }),
   //   });
   // });
+
+  // ESSE MOCK FUNCIONOU COM O DRINKS, COM O MEALS NÃO ! ENTÃO DEPENDE DA PÁGINA QUE ESTÁ SENDO TESTADA,
+  // AS VEZES FUNCIONA COM UM MOCK, AS VEZES COM OUTRO. (DRINKS OU MEALS)
 
   beforeEach(() => {
     global.fetch = vi.fn().mockResolvedValue({

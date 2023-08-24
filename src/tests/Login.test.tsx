@@ -7,6 +7,7 @@ import { mockDrink } from './mocks/mockMealsAndDrinks';
 // import { mockMeal, mockDrink } from './mocks/mockMealsAndDrinks';
 
 describe('Testa a página de Login', () => {
+  // ESSE MOCK NÃO FUNCIONOU:
   // beforeEach(() => {
   //   const mockFetch = () => Promise.resolve({
   //     json: () => Promise.resolve({}),
