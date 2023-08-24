@@ -1,10 +1,17 @@
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { vi } from 'vitest';
 import renderWithRouter from './renderWithRouter';
 import Profile from '../components/Profile';
 import App from '../App';
+import { mockMeal } from './mocks/mockMealsAndDrinks';
 
 describe('Testa a página de Perfil', () => {
+  beforeEach(() => {
+    global.fetch = vi.fn().mockResolvedValue({
+      json: async () => ({ meals: mockMeal.meals }),
+    });
+  });
   test('Verifica se a página renderiza os botões corretos', () => {
     renderWithRouter(<Profile />);
     const doneRecipesBtn = screen.getByTestId(/profile-done-btn/i);
