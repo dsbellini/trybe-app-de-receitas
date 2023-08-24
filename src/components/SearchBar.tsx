@@ -13,6 +13,7 @@ export default function SearchI() {
   const { state, update } = useContext(RevenueContext);
   const [searchParams, setSearchParams] = useState<SearchParams>(INITIAL_SEARCH);
   const navigate = useNavigate();
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchParams({
       ...searchParams, [e.target.id]: e.target.value,
