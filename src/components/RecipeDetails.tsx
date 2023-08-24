@@ -106,6 +106,7 @@ function RecipeDetails({ scope }: RecipesProps) {
         setHearteMark(yesOrNo);
       }
     };
+
     getRecipe();
   }, []);
   // pega 6 das recomendações geradas pela api
