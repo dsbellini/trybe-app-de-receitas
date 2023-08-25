@@ -52,7 +52,7 @@ function App() {
           element={ <FavoriteRecipes /> }
         />
       </Routes>
-    </LoginProvider>
+    </LoginProvider> // comentario
   );
 }
 
