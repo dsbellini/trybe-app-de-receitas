@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import shareIcon from '../images/shareIcon.svg';
 import { DoneReciepesType } from '../exportTypes/types';
-import Header from './Header'; // Import the Header component
 
 function DoneRecipes() {
   const [doneRecipes, setDoneRecipes] = useState<DoneReciepesType[]>([]);
@@ -11,12 +10,19 @@ function DoneRecipes() {
 
   useEffect(() => {
     const storedDoneRecipes = localStorage.getItem('doneRecipes');
+    // verifica se o localStorage tem alguma receita e coloca no state doneRecipes
     if (storedDoneRecipes !== null) {
       const parsedDoneRecipes: DoneReciepesType[] = JSON.parse(storedDoneRecipes);
       setDoneRecipes(parsedDoneRecipes);
     }
   }, []);
 
+  // Verificando o que está vindo do localStorage
+  useEffect(() => {
+    console.log(doneRecipes);
+  }, [doneRecipes]);
+
+  // função para colocar a data neste formato 00/00/0000
   function formatDate(oldDateString: string) {
     if (oldDateString.length === 10) {
       return oldDateString;
@@ -29,8 +35,6 @@ function DoneRecipes() {
 
   return (
     <>
-      <Header pageTitle="Done Recipes" searchIcon={ false } />
-
       <div>
         <button
           data-testid="filter-by-all-btn"
@@ -56,6 +60,7 @@ function DoneRecipes() {
         <div key={ index }>
           {filteredType === null || filteredType === recipe.type ? (
             <div>
+
               <Link to={ `/${recipe.type}s/${recipe.id}` }>
                 <p data-testid={ `${index}-horizontal-name` }>{recipe.name}</p>
               </Link>
@@ -104,6 +109,7 @@ function DoneRecipes() {
               </button>
 
               {showMessageIndex === index && <p>Link copied!</p>}
+
             </div>
           ) : (
             null

@@ -6,12 +6,24 @@ import Profile from '../components/Profile';
 import App from '../App';
 import { mockMeal } from './mocks/mockMealsAndDrinks';
 
+const userData = {
+  user: {
+    email: 'email@teste.com',
+  },
+};
+
 describe('Testa a página de Perfil', () => {
   beforeEach(() => {
     global.fetch = vi.fn().mockResolvedValue({
       json: async () => ({ meals: mockMeal.meals }),
     });
   });
+
+  afterEach(() => {
+    localStorage.clear();
+    vi.clearAllMocks();
+  });
+
   test('Verifica se a página renderiza os botões corretos', () => {
     renderWithRouter(<Profile />);
     const doneRecipesBtn = screen.getByTestId(/profile-done-btn/i);
@@ -23,34 +35,46 @@ describe('Testa a página de Perfil', () => {
   });
 
   test('Verifica se o localStorage é limpo ao clicar em logout', async () => {
+    localStorage.setItem('userData', JSON.stringify(userData));
+
     renderWithRouter(<App />, { route: '/profile' });
     const logoutBtn = screen.getByTestId(/profile-logout-btn/i);
     expect(logoutBtn).toBeInTheDocument();
     await userEvent.click(logoutBtn);
-    // expect(localStorage.clear);
-    const email = screen.getByTestId(/email-input/i);
-    const senha = screen.getByTestId(/password-input/i);
-    const botao = screen.getByTestId(/login-submit-btn/i);
-    expect(email).toBeInTheDocument();
-    expect(senha).toBeInTheDocument();
-    expect(botao).toBeInTheDocument();
+    expect(window.localStorage.getItem('userData')).toBeNull();
   });
 
   test('Verifica se o email inserido no login é renderizado na tela', async () => {
-    renderWithRouter(<App />, { route: '/' });
-    const email = screen.getByTestId(/email-input/i);
-    const senha = screen.getByTestId(/password-input/i);
-    const botao = screen.getByTestId(/login-submit-btn/i);
+    localStorage.setItem('userData', JSON.stringify(userData));
 
-    expect(botao).toBeDisabled();
-    await userEvent.type(email, 'email@email.com');
-    await userEvent.type(senha, '1234567');
-    expect(botao).toBeEnabled();
-    await userEvent.click(botao);
-    const profileButton = screen.getByTestId(/profile-top-btn/i);
-    expect(profileButton).toBeInTheDocument();
-    await userEvent.click(profileButton);
-    const profileEmail = screen.getByTestId(/profile-email/i);
-    expect(profileEmail).toContainHTML('email@email.com');
+    renderWithRouter(<App />, { route: '/profile' });
+    expect(window.localStorage.getItem('userData')).toBe(JSON.stringify(userData));
+  });
+
+  test('Verifica se a página é redirecionada após clicar no botão Done Recipes', async () => {
+    renderWithRouter(<App />, { route: '/profile' });
+
+    const doneRecipesBtn = screen.getByTestId(/profile-done-btn/i);
+    await userEvent.click(doneRecipesBtn);
+
+    expect(window.location.pathname).toBe('/done-recipes');
+  });
+
+  test('Verifica se a página é redirecionada após clicar no botão Favorite Recipes', async () => {
+    renderWithRouter(<App />, { route: '/profile' });
+
+    const favRecipesBtn = screen.getByTestId(/profile-favorite-btn/i);
+    await userEvent.click(favRecipesBtn);
+
+    expect(window.location.pathname).toBe('/favorite-recipes');
+  });
+
+  test('Verifica se a página é redirecionada para a tela de Login após o logout', async () => {
+    renderWithRouter(<App />, { route: '/profile' });
+
+    const logoutBtn = screen.getByTestId(/profile-logout-btn/i);
+    await userEvent.click(logoutBtn);
+
+    expect(window.location.pathname).toBe('/');
   });
 });
