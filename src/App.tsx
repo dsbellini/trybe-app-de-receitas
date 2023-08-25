@@ -13,7 +13,6 @@ import DoneRecipes from './components/DoneRecipes';
 import FavoriteRecipes from './components/FavoriteRecipes';
 // import PrincipalFoodPage from './components/PrincipalFoodPage'; deixando assim por conta de não estar sendo usado
 // import PrincipalDrinkPage from './components/PrincipalDrinkPage';
-
 function App() {
   return (
     <LoginProvider>
@@ -55,5 +54,4 @@ function App() {
     </LoginProvider>
   );
 }
-
 export default App;
