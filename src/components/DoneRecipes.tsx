@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import shareIcon from '../images/shareIcon.svg';
 import { DoneReciepesType } from '../exportTypes/types';
+import Header from './Header';
 
 function DoneRecipes() {
   const [doneRecipes, setDoneRecipes] = useState<DoneReciepesType[]>([]);
@@ -36,6 +37,9 @@ function DoneRecipes() {
   return (
     <>
       <div>
+
+        <Header pageTitle="Done Recipes" searchIcon={ false } />
+
         <button
           data-testid="filter-by-all-btn"
           onClick={ () => setFilteredType(null) }
