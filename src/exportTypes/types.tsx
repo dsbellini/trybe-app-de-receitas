@@ -41,6 +41,18 @@ export type FavoriteType = {
   image: string;
 };
 
+export type DoneReciepesType = {
+  id: string,
+  nationality: string,
+  name: string,
+  category: string,
+  image: string,
+  tags: string[],
+  alcoholicOrNot: string,
+  type: 'meal' | 'drink',
+  doneDate: string,
+};
+
 export type Revenue = {
   idMeal: string;
   idDrink: string;
