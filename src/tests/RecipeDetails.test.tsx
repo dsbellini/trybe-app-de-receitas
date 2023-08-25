@@ -6,7 +6,6 @@ import App from '../App';
 import { mockMeal, mockDrink } from './mocks/mockMealsAndDrinks';
 import { recomMeals } from './mocks/mockRecomMeal';
 import { recomDrinks } from './mocks/mockRecomDrink';
-import { useNavigate } from 'react-router-dom';
 
 const mealsData = { meals: mockMeal.meals };
 const drinksData = { drinks: mockDrink.drinks };
