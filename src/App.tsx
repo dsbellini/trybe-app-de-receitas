@@ -10,6 +10,7 @@ import RecipeDetails from './components/RecipeDetails';
 import Profile from './components/Profile';
 import RecipeInProgress from './components/RecipeInProgress/RecipeInProgress';
 import DoneRecipes from './components/DoneRecipes';
+import FavoriteRecipes from './components/FavoriteRecipes'
 // import PrincipalFoodPage from './components/PrincipalFoodPage'; deixando assim por conta de não estar sendo usado
 // import PrincipalDrinkPage from './components/PrincipalDrinkPage';
 
@@ -46,12 +47,12 @@ function App() {
           path="/done-recipes"
           element={ <DoneRecipes /> }
         />
-        <Route
+          <Route
           path="/favorite-recipes"
-          // element={ <Header pageTitle="Favorite Recipes" searchIcon={ false } /> }
+          element={ <FavoriteRecipes /> }
         />
       </Routes>
-    </LoginProvider>
+    </LoginProvider> // comentario
   );
 }
 
