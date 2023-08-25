@@ -113,6 +113,8 @@ function RecipeDetails({ scope }: RecipesProps) {
   useEffect(() => {
     const getRecommendation = async () => {
       const data = await ServiceFood(scope).recommendation() as unknown as RecommType;
+      localStorage
+        .setItem('f', JSON.stringify(data));
       if (scope === 'meals') setRecomm(data.drinks.filter((e, i) => i < 6));
       else setRecomm(data.meals.filter((e, i) => i < 6));
     };
