@@ -151,7 +151,7 @@ function RecipeInProgress() {
   // Função para finalizar a receita e salvar no localStorage - aguardando a página anterior ficar pronta para finalizar
   const handleFinishClick = () => {
     const date = new Date();
-    const doneRecipes = [{
+    const doneRecipes = {
       id: recipe?.idDrink || recipe?.idMeal,
       nationality: recipe?.strArea || '',
       name: recipe?.strDrink || recipe?.strMeal,
@@ -161,8 +161,14 @@ function RecipeInProgress() {
       alcoholicOrNot: recipe?.strAlcoholic || '',
       type: scope.slice(0, -1),
       doneDate: date,
-    }];
-    localStorage.setItem('doneRecipes', JSON.stringify([...doneRecipes]));
+    };
+
+    const storedDoneRecipes = localStorage.getItem('doneRecipes');
+    const existingDoneRecipes = storedDoneRecipes ? JSON.parse(storedDoneRecipes) : [];
+
+    const updatedDoneRecipes = [...existingDoneRecipes, doneRecipes];
+    localStorage.setItem('doneRecipes', JSON.stringify(updatedDoneRecipes));
+
     nav('/done-recipes');
   };
 

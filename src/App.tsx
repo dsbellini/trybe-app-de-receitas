@@ -9,6 +9,7 @@ import Revenues from './components/Recipes';
 import RecipeDetails from './components/RecipeDetails';
 import Profile from './components/Profile';
 import RecipeInProgress from './components/RecipeInProgress/RecipeInProgress';
+import DoneRecipes from './components/DoneRecipes';
 
 function App() {
   return (
@@ -41,7 +42,7 @@ function App() {
         />
         <Route
           path="/done-recipes"
-          // element={ <Header pageTitle="Done Recipes" searchIcon={ false } /> }
+          element={ <DoneRecipes /> }
         />
         <Route
           path="/favorite-recipes"
