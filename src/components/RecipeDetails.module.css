@@ -2,7 +2,6 @@
   border-color: black;
   bottom: 0;
   position: fixed;
-  z-index: 1;
 }
 
 .absolute {
@@ -11,5 +10,4 @@
   right: 32px;
   top: 35px;
   width: 120px;
-  z-index: 1;
 }

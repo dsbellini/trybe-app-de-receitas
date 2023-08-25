@@ -10,6 +10,8 @@ import RecipeDetails from './components/RecipeDetails';
 import Profile from './components/Profile';
 import RecipeInProgress from './components/RecipeInProgress/RecipeInProgress';
 import DoneRecipes from './components/DoneRecipes';
+// import PrincipalFoodPage from './components/PrincipalFoodPage'; deixando assim por conta de não estar sendo usado
+// import PrincipalDrinkPage from './components/PrincipalDrinkPage';
 
 function App() {
   return (

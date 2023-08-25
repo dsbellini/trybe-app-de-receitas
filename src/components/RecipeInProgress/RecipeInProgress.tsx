@@ -234,7 +234,6 @@ function RecipeInProgress() {
         data-testid="finish-recipe-btn"
         disabled={ disabledButton }
         onClick={ handleFinishClick }
-
       >
         Finalizar Receita
 
