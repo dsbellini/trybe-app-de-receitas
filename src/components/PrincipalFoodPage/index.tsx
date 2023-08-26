@@ -75,7 +75,9 @@ function PrincipalFoodPage() {
             to={ `/meals/${item.idMeal}` }
             key={ item.idMeal }
           >
-            <div data-testid={ `${index}-recipe-card` }>
+            <div
+              data-testid={ `${index}-recipe-card` }
+            >
               <img
                 src={ item.strMealThumb }
                 alt={ item.strMeal }
