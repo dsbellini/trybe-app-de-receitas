@@ -19,9 +19,9 @@ function DoneRecipes() {
   }, []);
 
   // Verificando o que está vindo do localStorage
-  useEffect(() => {
-    console.log(doneRecipes);
-  }, [doneRecipes]);
+  // useEffect(() => {
+  //   console.log(doneRecipes);
+  // }, [doneRecipes]);
 
   // função para colocar a data neste formato 00/00/0000
   function formatDate(oldDateString: string) {

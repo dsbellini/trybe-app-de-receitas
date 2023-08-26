@@ -215,4 +215,20 @@ describe('Testa a página de Detalhes da receita', () => {
     await userEvent.click(btnStart);
     expect(window.location.pathname).toEqual('/drinks/15997/in-progress');
   });
+
+  it('Verifica se o botão de copir link mostra a mensagem "Link copied!"', async () => {
+    renderWithRouter(<App />, { route: DEFAULT_MEAL });
+
+    const btnShare = screen.getByTestId('share-btn');
+    await userEvent.click(btnShare);
+    const copy = screen.getByText('Link copied!');
+    expect(copy).toBeInTheDocument();
+  });
+  it('Verifica se muda de rota ao clicar no botão "Start Recipe"', async () => {
+    renderWithRouter(<App />, { route: DEFAULT_MEAL });
+
+    const btnStart = screen.getByTestId('start-recipe-btn');
+    await userEvent.click(btnStart);
+    expect(window.location.pathname).toEqual('/meals/53060/in-progress');
+  });
 });

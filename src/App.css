@@ -1,3 +1,7 @@
+img {
+  max-width: 200px;
+}
+
 .meals {
   align-items: center;
   background: #0fa36b;
