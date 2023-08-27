@@ -57,11 +57,11 @@ const recipesTest = [{
   nationality: 'Croatian',
   type: 'meal',
 },
-{ alcoholicOrNot: 'Alcoholic',
-  category: 'Cocktail',
-  id: '17225',
-  image: 'https://www.thecocktaildb.com/images/media/drink/l3cd7f1504818306.jpg',
-  name: 'Ace',
+{ alcoholicOrNot: 'Optional alcohol',
+  category: 'Ordinary Drink',
+  id: '15997',
+  image: 'https://www.thecocktaildb.com/images/media/drink/vyxwut1468875960.jpg',
+  name: 'GG',
   nationality: '',
   type: 'drink' }];
 
@@ -101,13 +101,13 @@ describe('Testa a página de Favoritos', () => {
     const filterAll = await screen.getByTestId(/filter-by-all-btn/i);
 
     await userEvent.click(filterDrink);
-    expect(screen.getByText(/Ace/i)).toBeInTheDocument();
+    expect(screen.getByText(/GG/i)).toBeInTheDocument();
 
     await userEvent.click(filterMeal);
     expect(screen.getByText(/Burek/i)).toBeInTheDocument();
 
     await userEvent.click(filterAll);
-    expect(screen.getByText(/Ace/i)).toBeInTheDocument();
+    expect(screen.getByText(/GG/i)).toBeInTheDocument();
     expect(screen.getByText(/Burek/i)).toBeInTheDocument();
   });
 
@@ -163,6 +163,6 @@ describe('Testa a página de Favoritos', () => {
 
     const nameDrink = screen.getByTestId(/1-horizontal-image/i);
     await userEvent.click(nameDrink);
-    expect(window.location.pathname).toEqual('/drinks/17225');
+    expect(window.location.pathname).toEqual('/drinks/15997');
   });
 });
