@@ -7,7 +7,7 @@ import blackHeart from '../../images/blackHeartIcon.svg';
 
 function FavoriteRecipes() {
   const [favorites, setFavorites] = useState<FavoriteType[]>([]);
-  const [filteredType, setFilteredType] = useState<string | null>(null);
+  const [filteredType, setFilteredType] = useState<string>('');
   const [copySuccess, setCopySuccess] = useState('');
 
   const handleCopyLink = (recipe: FavoriteType) => {
@@ -46,12 +46,11 @@ function FavoriteRecipes() {
         <Header
           pageTitle="Favorite Recipes"
           searchIcon={ false }
-          onSearchButtonClick={ () => {} }
         />
 
         <button
           data-testid="filter-by-all-btn"
-          onClick={ () => setFilteredType(null) }
+          onClick={ () => setFilteredType('') }
         >
           All
         </button>
