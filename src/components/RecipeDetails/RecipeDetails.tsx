@@ -2,11 +2,11 @@ import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { ServiceFood } from '../services';
-import { Scope, Revenue, RecommType, FavoriteType } from '../exportTypes/types';
-import shareIcon from '../images/shareIcon.svg';
-import whiteHeart from '../images/whiteHeartIcon.svg';
-import blackHeart from '../images/blackHeartIcon.svg';
+import { ServiceFood } from '../../services';
+import { Scope, Revenue, RecommType, FavoriteType } from '../../exportTypes/types';
+import shareIcon from '../../images/shareIcon.svg';
+import whiteHeart from '../../images/whiteHeartIcon.svg';
+import blackHeart from '../../images/blackHeartIcon.svg';
 import style from './RecipeDetails.module.css';
 
 export type RecipesProps = {
@@ -66,13 +66,11 @@ function RecipeDetails({ scope }: RecipesProps) {
       if (!yesOrNo) {
         localStorage
           .setItem('favoriteRecipes', JSON.stringify([...favorited, favoriteRecipe]));
-        console.log([...favorited, favoriteRecipe]);
       } else {
         const removeRecipe = favorited
           .filter((e) => e.id !== (recipe?.idDrink || recipe?.idMeal));
         localStorage
           .setItem('favoriteRecipes', JSON.stringify(removeRecipe));
-        console.log(removeRecipe);
       }
     } else {
       localStorage

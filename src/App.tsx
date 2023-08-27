@@ -6,11 +6,11 @@ import Footer from './components/Footer';
 import LoginProvider from './context/LoginProvider';
 import { Scope } from './exportTypes/types';
 import Revenues from './components/Recipes';
-import RecipeDetails from './components/RecipeDetails';
+import RecipeDetails from './components/RecipeDetails/RecipeDetails';
 import Profile from './components/Profile';
 import RecipeInProgress from './components/RecipeInProgress/RecipeInProgress';
 import DoneRecipes from './components/DoneRecipes';
-import FavoriteRecipes from './components/FavoriteRecipes';
+import FavoriteRecipes from './components/FavoriteRecipes/FavoriteRecipes';
 // import PrincipalFoodPage from './components/PrincipalFoodPage'; deixando assim por conta de não estar sendo usado
 // import PrincipalDrinkPage from './components/PrincipalDrinkPage';
 function App() {
