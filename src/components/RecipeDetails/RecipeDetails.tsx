@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import { useEffect, useState } from 'react';
@@ -147,22 +148,38 @@ function RecipeDetails({ scope }: RecipesProps) {
   // define a responsividade do Carousel
   const responsive = {
     mobile: {
-      breakpoint: { max: 3000, min: 0 },
+      breakpoint: { max: 464, min: 0 },
       items: 2,
+      partialVisibilityGutter: 30,
     },
   };
 
   return (
-    <>
-      <div>
-        <h1 data-testid="recipe-title">
-          {recipe?.strMeal || recipe?.strDrink}
-        </h1>
-        <p data-testid="recipe-category">
-          { scope === 'drinks' ? recipe?.strAlcoholic : recipe?.strCategory }
-        </p>
-        <div>
-          { copySuccess === true ? <p>Link copied!</p> : null }
+    <body>
+      <div className={ style.contente }>
+        <div className={ style.backgroundImage }>
+          <h1 data-testid="recipe-title">
+            {recipe?.strMeal || recipe?.strDrink}
+          </h1>
+          <img
+            className={ style.image }
+            src={ recipe?.strMealThumb || recipe?.strDrinkThumb }
+            alt={ recipe?.strMeal || recipe?.strDrink }
+            data-testid="recipe-photo"
+          />
+          <p data-testid="recipe-category">
+            {scope === 'drinks' ? recipe?.strAlcoholic : recipe?.strCategory}
+          </p>
+        </div>
+
+        {copySuccess === true
+          ? (
+            <div className={ style.backgroundCopyLink }>
+              <p>Link copied!</p>
+            </div>)
+          : null}
+
+        <div className={ style.backgroundIcons }>
           <button
             data-testid="share-btn"
             onClick={ handleCopyLink }
@@ -172,27 +189,32 @@ function RecipeDetails({ scope }: RecipesProps) {
           <button
             onClick={ handleFavorite }
           >
-            { hearteMark
+            {hearteMark
               ? <img src={ blackHeart } alt="black" data-testid="favorite-btn" />
               : <img src={ whiteHeart } alt="white" data-testid="favorite-btn" />}
           </button>
         </div>
-        <img
-          src={ recipe?.strMealThumb || recipe?.strDrinkThumb }
-          alt={ recipe?.strMeal || recipe?.strDrink }
-          data-testid="recipe-photo"
-          width="420"
-          height="315"
-        />
-        <p data-testid="instructions">
-          {recipe?.strInstructions}
-        </p>
-        { ingAndMea.map((e, i) => (
-          <p data-testid={ `${i}-ingredient-name-and-measure` } key={ i }>
-            { e }
+        <div className={ style.instructions }>
+          <h3>instructions</h3>
+          <p data-testid="instructions">
+            {recipe?.strInstructions}
           </p>
-        )) }
-        { recipe?.strYoutube
+
+        </div>
+        <div className={ style.backgroundIngredients }>
+          {ingAndMea.map((e, i) => (
+            <p
+              className={ style.ingredients }
+              data-testid={ `${i}-ingredient-name-and-measure` }
+              key={ i }
+            >
+              {e}
+            </p>
+          ))}
+
+        </div>
+
+        {recipe?.strYoutube
           ? (
             <iframe
               data-testid="video"
@@ -202,42 +224,47 @@ function RecipeDetails({ scope }: RecipesProps) {
               src={ recipe?.strYoutube.replace('watch?v=', 'embed/') }
             />
           )
-          : null }
+          : null}
       </div>
-
       <div>
-        <Carousel responsive={ responsive }>
-          { recomm.map((element, index) => (
+        <Carousel
+          className={ style.carrosel }
+          responsive={ responsive }
+          draggable
+          minimumTouchDrag={ 80 }
+          slidesToSlide={ 2 }
+        >
+          {recomm.map((element, index) => (
             <span
               data-testid={ `${index}-recommendation-card` }
               key={ element.idMeal || element.idDrink }
             >
               <img
                 src={ element.strDrinkThumb
-              || element.strMealThumb }
+                  || element.strMealThumb }
                 alt={ element.strMeal
-              || element.strDrink }
+                  || element.strDrink }
               />
               <p
                 data-testid={ `${index}-recommendation-title` }
               >
-                { element.strMeal || element.strDrink}
+                {element.strMeal || element.strDrink}
               </p>
             </span>
           ))}
         </Carousel>
-      </div>
 
+      </div>
       <div className={ style.absolute }>
         <button
           className={ style.btnRecipe }
           onClick={ handleStartRecipe }
           data-testid="start-recipe-btn"
         >
-          { stateRecipe === '' ? START_RECIPE : stateRecipe}
+          {stateRecipe === '' ? START_RECIPE : stateRecipe}
         </button>
       </div>
-    </>
+    </body>
   );
 }
 

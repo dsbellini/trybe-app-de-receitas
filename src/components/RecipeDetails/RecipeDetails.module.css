@@ -1,13 +1,82 @@
-.btnRecipe {
-  border-color: black;
-  bottom: 0;
-  position: fixed;
+.contente {
+  display: flex;
+  flex-direction: column;
 }
 
-.absolute {
+.btnRecipe {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
   height: 50px;
-  position: absolute;
-  right: 32px;
-  top: 35px;
-  width: 120px;
+  background-color: saddlebrown;
+  color: azure;
+  font-size: large;
+  text-align: center;
+  border-color: saddlebrown;
+}
+
+.backgroundCopyLink {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  background-color: white;
+  border-radius: 10px;
+  width:  105px;
+  height: 40px;
+  z-index: 5;
+  top: 85%;
+  right: 36%;
+}
+
+.backgroundImage{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.backgroundIcons{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: row;
+  margin-bottom: 20px;
+}
+
+.instructions {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.ingredients {
+  margin-bottom: 5px;
+}
+
+.backgroundIngredients {
+  margin-bottom: 15px;
+}
+
+.image {
+  width: 350px;
+  height: auto;
+  border-radius: 10px;
+}
+
+.carrosel {
+  height: 400px;
+}
+
+p {
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  line-height: 150%;
+  font-size:medium;
+  text-align: justify;
+}
+
+body {
+  display: block;
 }
