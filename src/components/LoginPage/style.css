@@ -20,6 +20,10 @@ body {
     max-width: 100%;
 }
 
+.cookfy-logo img {
+    max-width: 200px;
+}
+
 .mb-3 input {
     margin-bottom: 0.5rem;
 }
