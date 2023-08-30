@@ -3,6 +3,7 @@ import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { Button, ButtonGroup } from 'react-bootstrap';
 import { ServiceFood } from '../../services';
 import { Scope, Revenue, RecommType, FavoriteType } from '../../exportTypes/types';
 import shareIcon from '../../images/shareIcon.svg';
@@ -180,26 +181,27 @@ function RecipeDetails({ scope }: RecipesProps) {
           : null}
 
         <div className={ style.backgroundIcons }>
-          <button
-            data-testid="share-btn"
-            onClick={ handleCopyLink }
+          <ButtonGroup
+            size="sm"
+            className="mb-2"
           >
-            <img src={ shareIcon } alt="share-icon" />
-          </button>
-          <button
-            onClick={ handleFavorite }
-          >
-            {hearteMark
-              ? <img src={ blackHeart } alt="black" data-testid="favorite-btn" />
-              : <img src={ whiteHeart } alt="white" data-testid="favorite-btn" />}
-          </button>
-        </div>
-        <div className={ style.instructions }>
-          <h3>Instructions</h3>
-          <p data-testid="instructions">
-            {recipe?.strInstructions}
-          </p>
 
+            <Button
+              data-testid="share-btn"
+              onClick={ handleCopyLink }
+              variant="light"
+            >
+              <img src={ shareIcon } alt="share-icon" />
+            </Button>
+            <Button
+              onClick={ handleFavorite }
+              className="btn btn-light"
+            >
+              {hearteMark
+                ? <img src={ blackHeart } alt="black" data-testid="favorite-btn" />
+                : <img src={ whiteHeart } alt="white" data-testid="favorite-btn" />}
+            </Button>
+          </ButtonGroup>
         </div>
         <div className={ style.backgroundIngredients }>
           <h3>Ingredients</h3>
@@ -212,6 +214,13 @@ function RecipeDetails({ scope }: RecipesProps) {
               {e}
             </p>
           ))}
+
+        </div>
+        <div className={ style.instructions }>
+          <h3>Instructions</h3>
+          <p data-testid="instructions">
+            {recipe?.strInstructions}
+          </p>
 
         </div>
         <div className={ style.video }>
