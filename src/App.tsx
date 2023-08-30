@@ -1,7 +1,7 @@
 import './App.css';
-// import 'bootstrap/dist/css/bootstrap.min.css'; // Está gerando erro no teste da pagina RecipeInProgress - favor deixar desativado ! //
+import 'bootstrap/dist/css/bootstrap.min.css'; // Está gerando erro no teste da pagina RecipeInProgress - favor deixar desativado ! //
 import { Route, Routes } from 'react-router-dom';
-import Login from './components/Login';
+import Login from './components/LoginPage/Login';
 import Footer from './components/Footer';
 import LoginProvider from './context/LoginProvider';
 import { Scope } from './exportTypes/types';
