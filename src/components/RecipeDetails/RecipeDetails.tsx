@@ -195,13 +195,14 @@ function RecipeDetails({ scope }: RecipesProps) {
           </button>
         </div>
         <div className={ style.instructions }>
-          <h3>instructions</h3>
+          <h3>Instructions</h3>
           <p data-testid="instructions">
             {recipe?.strInstructions}
           </p>
 
         </div>
         <div className={ style.backgroundIngredients }>
+          <h3>Ingredients</h3>
           {ingAndMea.map((e, i) => (
             <p
               className={ style.ingredients }
@@ -213,26 +214,29 @@ function RecipeDetails({ scope }: RecipesProps) {
           ))}
 
         </div>
+        <div className={ style.video }>
+          {recipe?.strYoutube
+            ? (
+              <iframe
+                data-testid="video"
+                title={ recipe?.strMeal }
+                width="350"
+                height="220"
+                src={ recipe?.strYoutube.replace('watch?v=', 'embed/') }
+              />
+            )
+            : null}
+        </div>
 
-        {recipe?.strYoutube
-          ? (
-            <iframe
-              data-testid="video"
-              title={ recipe?.strMeal }
-              width="420"
-              height="315"
-              src={ recipe?.strYoutube.replace('watch?v=', 'embed/') }
-            />
-          )
-          : null}
       </div>
       <div>
         <Carousel
           className={ style.carrosel }
           responsive={ responsive }
+          arrows={ false }
           draggable
           minimumTouchDrag={ 80 }
-          slidesToSlide={ 2 }
+          slidesToSlide={ 1 }
         >
           {recomm.map((element, index) => (
             <span
