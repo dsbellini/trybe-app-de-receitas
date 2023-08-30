@@ -3,7 +3,7 @@ import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Button, ButtonGroup } from 'react-bootstrap';
+import { Alert, Button, ButtonGroup } from 'react-bootstrap';
 import { ServiceFood } from '../../services';
 import { Scope, Revenue, RecommType, FavoriteType } from '../../exportTypes/types';
 import shareIcon from '../../images/shareIcon.svg';
@@ -176,7 +176,7 @@ function RecipeDetails({ scope }: RecipesProps) {
         {copySuccess === true
           ? (
             <div className={ style.backgroundCopyLink }>
-              <p>Link copied!</p>
+              <Alert variant="success">Link copied!</Alert>
             </div>)
           : null}
 

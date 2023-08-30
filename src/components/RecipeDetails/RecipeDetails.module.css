@@ -7,7 +7,7 @@
 
 body {
   display: block;
-  color: white;
+  color: rgb(190, 190, 190)
 }
 
 .contente {
@@ -38,13 +38,12 @@ body {
   justify-content: center;
   align-items: center;
   position: fixed;
-  background-color: #849F27;
   border-radius: 10px;
-  width:  105px;
+  width:  130px;
   height: 40px;
   z-index: 5;
   top: 85%;
-  right: 36%;
+  right: 35%;
 }
 
 .backgroundCopyLink p {

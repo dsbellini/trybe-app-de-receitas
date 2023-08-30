@@ -7,7 +7,7 @@ import LoginProvider from './context/LoginProvider';
 import { Scope } from './exportTypes/types';
 import Revenues from './components/Recipes';
 import RecipeDetails from './components/RecipeDetails/RecipeDetails';
-import Profile from './components/Profile';
+import Profile from './components/ProfilePage/Profile';
 import RecipeInProgress from './components/RecipeInProgress/RecipeInProgress';
 import DoneRecipes from './components/DoneRecipes';
 import FavoriteRecipes from './components/FavoriteRecipes/FavoriteRecipes';
