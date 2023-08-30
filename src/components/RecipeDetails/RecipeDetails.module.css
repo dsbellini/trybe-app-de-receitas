@@ -8,11 +8,11 @@
   bottom: 0;
   width: 100%;
   height: 50px;
-  background-color: saddlebrown;
+  background-color: #849F27;
   color: azure;
   font-size: large;
   text-align: center;
-  border-color: saddlebrown;
+  border-color: #849F27;
 }
 
 .backgroundCopyLink {
@@ -68,6 +68,11 @@
 
 .carrosel {
   height: 400px;
+}
+
+.imageCarousel {
+  width: 200px;
+  height: auto;
 }
 
 .video {

@@ -244,6 +244,7 @@ function RecipeDetails({ scope }: RecipesProps) {
               key={ element.idMeal || element.idDrink }
             >
               <img
+                className={ style.imageCarousel }
                 src={ element.strDrinkThumb
                   || element.strMealThumb }
                 alt={ element.strMeal
