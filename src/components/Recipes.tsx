@@ -5,7 +5,7 @@ import Header from './Header';
 import { Scope } from '../exportTypes/types';
 import RevenueList from './Revenue/RevenuesList';
 import Recipes from '../pages/PagesRecipes';
-import Footer from './Footer';
+import Footer from './Footer/Footer';
 
 export type RevenuesProps = {
   scope: Scope;

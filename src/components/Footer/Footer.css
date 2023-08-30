@@ -1,0 +1,27 @@
+.footer-container {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+}
+
+.icon-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; 
+  width: 80%; 
+  max-width: 300px;
+}
+
+.icon-link {
+  display: inline-block;
+  text-align: center;
+  text-decoration: none;
+}
+
+.icon {
+  width: 60px;
+  height: 60px;
+}
