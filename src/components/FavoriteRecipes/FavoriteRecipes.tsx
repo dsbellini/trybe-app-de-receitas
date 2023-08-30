@@ -10,6 +10,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
+import Card from 'react-bootstrap/Card';
 import style from './FavoriteRecipes.module.css';
 
 function FavoriteRecipes() {
@@ -52,29 +53,35 @@ function FavoriteRecipes() {
           pageTitle="Favorite Recipes"
           searchIcon={ false }
         />
-      <ButtonGroup className={ style.buttons }>
-        <Button
-          variant="success" 
-          data-testid="filter-by-all-btn"
-          onClick={ () => setFilteredType('') }
-        >
-          All
-        </Button >
-        <Button 
-          variant="success"
-          data-testid="filter-by-meal-btn"
-          onClick={ () => setFilteredType('meal') }
-        >
-          Meals
-        </Button >
-        <Button 
-          variant="success"
-          data-testid="filter-by-drink-btn"
-          onClick={ () => setFilteredType('drink') }
-        >
-          Drinks
-        </Button >
-      </ButtonGroup >
+      <Row>
+        <Col>
+          <button
+            className={ style.button }
+            data-testid="filter-by-all-btn"
+            onClick={ () => setFilteredType('') }
+          >
+            All
+          </button >
+        </Col>
+        <Col>
+          <button
+            className={ style.button }
+            data-testid="filter-by-all-btn"
+            onClick={ () => setFilteredType('meal') }
+          >
+            Meals
+          </button >
+        </Col>
+        <Col>
+          <button
+            className={ style.button }
+            data-testid="filter-by-all-btn"
+            onClick={ () => setFilteredType('drink') }
+          >
+            Drinks
+          </button >
+        </Col>
+      </Row>
 
       {favorites.filter((e) => {
         if (filteredType === 'meal') {
@@ -86,47 +93,39 @@ function FavoriteRecipes() {
         return true;
       })
         .map((recipe, index) => (
-          <Container className={ style.iten }>
-            <Row className='row' key={ index }>
-              <Col>  
-                <Link to={ `/${recipe.type}s/${recipe.id}` }>
-                  <Image
-                    className={ style.image }
-                    data-testid={ `${index}-horizontal-image` }
-                    alt={ recipe.name }
-                    src={ recipe.image }
-                  />
-                </Link>
-              </Col>
-
-              <Col>
-                <Link to={ `/${recipe.type}s/${recipe.id}` }>
-                  <p className={ style.name } data-testid={ `${index}-horizontal-name` }>{recipe.name}</p>
-                </Link>
-
-                <p className={ style.type } data-testid={ `${index}-horizontal-top-text` }>
-                  {recipe.type === 'meal'
+          <Container className={ style.item } >
+            <Card
+              className={ `${style.card} text-white text-center` }
+              style={{ width: '20rem' }}
+            >
+              <Link to={ `/${recipe.type}s/${recipe.id}` }>
+                <Card.Img variant="top" src={ recipe.image } />
+              </Link>
+              <Card.Body>
+                <Card.Title>              
+                  {recipe.name}
+                </Card.Title>
+                <ButtonGroup>
+                  <Button variant="light" onClick={ () => handleCopyLink(recipe) }>
+                    <Image
+                      src={ shareIcon }
+                      alt="Share"
+                      data-testid={ `${index}-horizontal-share-btn` }
+                    />
+                  </Button>
+                  <Button variant="light" onClick={ () => handleFavorite(recipe) }>
+                    <Image
+                      src={ blackHeart }
+                      alt="black"
+                      data-testid={ `${index}-horizontal-favorite-btn` }
+                    />
+                  </Button>
+                </ButtonGroup>
+              </Card.Body>
+              <Card.Footer className="text-muted">                  {recipe.type === 'meal'
                     ? `${recipe.nationality} - ${recipe.category}`
-                    : `${recipe.alcoholicOrNot}`}
-                </p>
-                  <ButtonGroup>
-                    <Button variant="light" onClick={ () => handleCopyLink(recipe) }>
-                      <Image
-                        src={ shareIcon }
-                        alt="Share"
-                        data-testid={ `${index}-horizontal-share-btn` }
-                      />
-                    </Button>
-                    <Button variant="light" onClick={ () => handleFavorite(recipe) }>
-                      <Image
-                        src={ blackHeart }
-                        alt="black"
-                        data-testid={ `${index}-horizontal-favorite-btn` }
-                      />
-                    </Button>
-                  </ButtonGroup>
-              </Col>
-            </Row>
+                    : `${recipe.alcoholicOrNot}`}</Card.Footer>
+            </Card>
           </Container>
 
         ))}
