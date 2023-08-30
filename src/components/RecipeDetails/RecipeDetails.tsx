@@ -159,15 +159,15 @@ function RecipeDetails({ scope }: RecipesProps) {
     <body>
       <div className={ style.contente }>
         <div className={ style.backgroundImage }>
-          <h1 data-testid="recipe-title">
-            {recipe?.strMeal || recipe?.strDrink}
-          </h1>
           <img
             className={ style.image }
             src={ recipe?.strMealThumb || recipe?.strDrinkThumb }
             alt={ recipe?.strMeal || recipe?.strDrink }
             data-testid="recipe-photo"
           />
+          <h1 data-testid="recipe-title">
+            {recipe?.strMeal || recipe?.strDrink}
+          </h1>
           <p data-testid="recipe-category">
             {scope === 'drinks' ? recipe?.strAlcoholic : recipe?.strCategory}
           </p>
@@ -229,8 +229,6 @@ function RecipeDetails({ scope }: RecipesProps) {
               <iframe
                 data-testid="video"
                 title={ recipe?.strMeal }
-                width="350"
-                height="220"
                 src={ recipe?.strYoutube.replace('watch?v=', 'embed/') }
               />
             )
