@@ -1,7 +1,9 @@
+/* eslint-disable max-lines */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react';
 import './styles.css';
 import { useNavigate } from 'react-router-dom';
+import { Alert, Button, ButtonGroup, Form, FormGroup } from 'react-bootstrap';
 import shareIcon from '../../images/shareIcon.svg';
 import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../../images/blackHeartIcon.svg';
@@ -174,43 +176,63 @@ function RecipeInProgress() {
 
   return (
     <>
-      <div>
+      <section className="main-section">
         <img
           src={ recipe?.strDrinkThumb || recipe?.strMealThumb }
           data-testid="recipe-photo"
           alt="Foto da Receita"
-          width="300"
-          height="200"
+          className="image"
         />
-      </div>
-      <h1 data-testid="recipe-title">{recipe?.strDrink || recipe?.strMeal}</h1>
-      {/* Share Button */}
-      <button
-        data-testid="share-btn"
-        onClick={ handleCopyLink }
-      >
-        <img src={ shareIcon } alt="share-icon" />
+        <h1
+          data-testid="recipe-title"
+          className="recipe-title"
+        >
+          {recipe?.strDrink || recipe?.strMeal}
+        </h1>
+        <p data-testid="recipe-category">{recipe?.strCategory}</p>
+        <div className="fav-copy-btns">
+          <ButtonGroup
+            size="sm"
+            className="mb-2"
+          >
+            {/* Share Button */}
+            <Button
+              data-testid="share-btn"
+              onClick={ handleCopyLink }
+              variant="light"
+            >
+              <img src={ shareIcon } alt="share-icon" />
 
-      </button>
-      {/* Favorite Button */}
-      <button
-        onClick={ handleFavorite }
-      >
-        { heartMark
-          ? <img src={ blackHeartIcon } alt="black" data-testid="favorite-btn" />
-          : <img src={ whiteHeartIcon } alt="white" data-testid="favorite-btn" />}
-      </button>
-      <p data-testid="recipe-category">{recipe?.strCategory}</p>
-      {copySuccess && <p>Link copied!</p>}
-      <div data-testid="instructions">
+            </Button>
+            {/* Favorite Button */}
+            <Button
+              onClick={ handleFavorite }
+              variant="light"
+
+            >
+              { heartMark
+                ? <img src={ blackHeartIcon } alt="black" data-testid="favorite-btn" />
+                : <img src={ whiteHeartIcon } alt="white" data-testid="favorite-btn" />}
+            </Button>
+          </ButtonGroup>
+        </div>
+      </section>
+
+      {copySuccess === true
+        ? (
+          <div className="copy-link">
+            <Alert variant="success">Link copied!</Alert>
+          </div>)
+        : null}
+      <div data-testid="instructions" className="instructions">
         <h2>Instructions</h2>
         <p>{recipe?.strInstructions}</p>
       </div>
-      <div data-testid="ingredients">
+      <div data-testid="ingredients" className="ingredients">
         <h2>Ingredients</h2>
         <ul>
           {ingAndMea.map((ingredient, index) => (
-            <li key={ index }>
+            <li key={ index } className="ingredients-list">
               <label
                 htmlFor={ ingredient }
                 className={ `${checkedItems[index] ? 'checked' : 'not-checked'}` }
@@ -230,14 +252,17 @@ function RecipeInProgress() {
           ))}
         </ul>
       </div>
-      <button
-        data-testid="finish-recipe-btn"
-        disabled={ disabledButton }
-        onClick={ handleFinishClick }
-      >
-        Finalizar Receita
+      <div className="d-grid gap-2">
+        <button
+          data-testid="finish-recipe-btn"
+          disabled={ disabledButton }
+          onClick={ handleFinishClick }
+          className="finish-btn"
+        >
+          Finalizar Receita
 
-      </button>
+        </button>
+      </div>
     </>
   );
 }

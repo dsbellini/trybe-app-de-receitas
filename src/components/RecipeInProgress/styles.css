@@ -1,13 +1,120 @@
-/* body {
-  background-color: #505050;
-} */
+.main-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
 
 .checked {
   display: inline-block;
-  text-decoration: line-through;
+  text-decoration: line-through 1px solid black;
+  margin-left: 5px;
+  opacity: 0.4;
 }
 
 .not-checked {
   text-decoration: none;
 }
+
+.image {
+  width: 100vw;
+  height: 100vw;
+}
+
+.recipe-title {
+  margin-top: 20px;
+  color: #849F27;
+}
+
+.fav-copy-btns {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+}
+
+.copy-link {
+    display: flex;
+    color: white;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    border-radius: 10px;
+    width:  130px;
+    height: 40px;
+    z-index: 5;
+    top: 85%;
+    right: 35%;
+}
+
+.copy-link p {
+  margin: 0;
+  padding: 0;
+}
+
+.instructions {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.instructions h2 {
+  margin-left: 20px;
+  color: #849F27;
+}
+
+.instructions p {
+  padding: 20px 20px;
+  text-align: justify;
+}
+
+.ingredients h2 {
+  margin-left: 20px;
+  color: #849F27;
+}
+
+.ingredients-list {
+  list-style-type: none;
+  padding: 2px;
+}
+
+/* .finish-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  border-radius: 10px;
+  width:  130px;
+  height: 40px;
+  z-index: 5;
+  top: 85%;
+  right: 35%;
+  background-color: #849F27;
+  color: white;
+  border: none;
+}; */
+
+/* .finish-btn {
+  background-color: #849F27;
+  border: none;
+}; */
+
+.finish-btn {
+  bottom: 0;
+  width: 100vw;
+  height: 50px;
+  background-color: #849F27;
+  color: azure;
+  font-size: large;
+  text-align: center;
+  transition: background-color 0.5s ease, color 0.3s ease;
+}
+
+.finish-btn:disabled {
+  color: rgba(255, 255, 255, 0.13);
+  background-color: #859f2711;
+}
+
+
+
+
 

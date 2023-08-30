@@ -43,7 +43,7 @@ function Login() {
               disabled={ !isFormValid() }
               className="login-button"
             >
-              Entrar
+              Login
             </Button>
           </div>
         </Form>

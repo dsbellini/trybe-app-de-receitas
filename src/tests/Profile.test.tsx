@@ -2,7 +2,7 @@ import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { vi } from 'vitest';
 import renderWithRouter from './renderWithRouter';
-import Profile from '../components/Profile';
+import Profile from '../components/ProfilePage/Profile';
 import App from '../App';
 import { mockMeal } from './mocks/mockMealsAndDrinks';
 
