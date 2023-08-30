@@ -2,23 +2,20 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import drinkIcon from '../images/drinkIcon.svg';
 import mealIcon from '../images/mealIcon.svg';
+import './Footer.css';
 
 function Footer() {
   return (
     <footer
       data-testid="footer"
-      style={ {
-        position: 'fixed',
-        bottom: 0,
-        width: '100%',
-      } }
+      className="footer-container"
     >
-      <div style={ { textAlign: 'center' } }>
-        <Link to="/drinks" data-testid="drinks-bottom-btn" src={ drinkIcon }>
-          <img src={ drinkIcon } alt="Drinks" />
+      <div className="icon-container">
+        <Link to="/meals" data-testid="meals-bottom-btn" className="icon-link">
+          <img src={ mealIcon } alt="Meals" className="icon" />
         </Link>
-        <Link to="/meals" data-testid="meals-bottom-btn" src={ mealIcon }>
-          <img src={ mealIcon } alt="Meals" />
+        <Link to="/drinks" data-testid="drinks-bottom-btn" className="icon-link">
+          <img src={ drinkIcon } alt="Drinks" className="icon" />
         </Link>
       </div>
     </footer>
