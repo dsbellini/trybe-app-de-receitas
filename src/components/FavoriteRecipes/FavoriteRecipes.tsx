@@ -12,6 +12,7 @@ import shareIcon from '../../images/shareIcon.svg';
 import { FavoriteType } from '../../exportTypes/types';
 import Header from '../Header/Header';
 import style from './FavoriteRecipes.module.css';
+import { Alert } from 'react-bootstrap';
 
 function FavoriteRecipes() {
   const [favorites, setFavorites] = useState<FavoriteType[]>([]);
@@ -65,7 +66,7 @@ function FavoriteRecipes() {
         </Col>
         <Col>
           <button
-            className={ style.btnMeals }
+            className={ style.btnAll }
             data-testid="filter-by-all-btn"
             onClick={ () => setFilteredType('meal') }
           >
@@ -74,7 +75,7 @@ function FavoriteRecipes() {
         </Col>
         <Col>
           <button
-            className={ style.btnDrinks }
+            className={ style.btnAll }
             data-testid="filter-by-all-btn"
             onClick={ () => setFilteredType('drink') }
           >
@@ -135,12 +136,9 @@ function FavoriteRecipes() {
         ))}
       { copySuccess === true
         ? (
-          <Button
-            variant="light"
-            className={ style.copy }
-          >
-            Link copied!
-          </Button>) : null }
+            <div className={ style.copy }>
+              <Alert variant="success">Link copied!</Alert>
+            </div>) : null }
     </div>
   );
 }

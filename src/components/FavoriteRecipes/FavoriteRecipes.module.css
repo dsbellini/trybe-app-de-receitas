@@ -1,4 +1,7 @@
 .item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   margin-top: 20px;
 }
 
@@ -7,14 +10,15 @@
 }
 
 .copy {
-  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: fixed;
   width:  130px;
   height: 40px;
   z-index: 2;
-  top: 85%;
-  right: 36%;
-  border-radius: 18px;
+  top: 90%;
+  right: 40%;
 }
 
 .btnAll {
@@ -26,21 +30,3 @@
   width: 100%;
 }
 
-.btnMeals {
-  background-color: #849f27;
-  border-color: #849f27;
-  border-radius: 5px;
-  color: white;
-  height: 8vh;
-  width: 100%;
-
-}
-
-.btnDrinks {
-  background-color: #849f27;
-  border-color: #849f27;
-  border-radius: 5px;
-  color: white;
-  height: 8vh;
-  width: 100%;
-}
