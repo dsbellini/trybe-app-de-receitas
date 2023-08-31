@@ -1,0 +1,13 @@
+.search-radio-buttons {
+    display: flex;
+    justify-content: space-evenly;
+    text-align: center;
+    font-size: 1.1rem;
+    margin: 10px 0 10px 0;
+}
+
+.search-btn {
+    background-color: #849F27;
+    border: none;
+    transition: background-color 0.5s ease, color 0.3s ease;
+}

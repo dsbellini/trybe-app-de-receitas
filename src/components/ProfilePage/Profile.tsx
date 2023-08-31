@@ -1,6 +1,6 @@
 import { Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import Header from '../Header';
+import Header from '../Header/Header';
 import Footer from '../Footer';
 import './style.css';
 
@@ -33,6 +33,7 @@ function Profile() {
           data-testid="profile-done-btn"
           onClick={ () => nav('/done-recipes') }
           className="profile-btns"
+          variant="success"
         >
           Done Recipes
         </Button>
@@ -40,6 +41,7 @@ function Profile() {
           data-testid="profile-favorite-btn"
           onClick={ () => nav('/favorite-recipes') }
           className="profile-btns"
+          variant="success"
         >
           Favorite Recipes
         </Button>

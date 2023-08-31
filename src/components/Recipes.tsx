@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { INITIAL_CONTEXT, RevenueProvider } from '../context/RevenuesContext';
 import { capitalized } from '../capitalized';
-import Header from './Header';
+import Header from './Header/Header';
 import { Scope } from '../exportTypes/types';
 import RevenueList from './Revenue/RevenuesList';
 import Recipes from '../pages/PagesRecipes';
@@ -28,7 +28,7 @@ function Revenues({ scope }: RevenuesProps) {
       } }
     >
       <Header
-        pageTitle={ `Revenues - ${capitalized(scope)}` }
+        pageTitle={ `${capitalized(scope)}` }
         onSearchButtonClick={ handleSearchButtonClick } // Passar a função para o Header
       />
       <RevenueList />

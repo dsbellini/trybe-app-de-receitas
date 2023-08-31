@@ -1,4 +1,6 @@
+import { Button } from 'react-bootstrap';
 import searchImg from '../images/searchIcon.svg';
+import './SearchButtonCSS.css';
 
 type SearchButtonProps = {
   barVisible: () => void;
@@ -7,12 +9,16 @@ type SearchButtonProps = {
 export default function SearchButton({ barVisible }:
 SearchButtonProps) {
   return (
-    <button onClick={ () => barVisible() }>
+    <Button
+      variant="link"
+      onClick={ () => barVisible() }
+    >
       <img
         data-testid="search-top-btn"
         src={ searchImg }
         alt="search icon"
+        className="search-button"
       />
-    </button>
+    </Button>
   );
 }

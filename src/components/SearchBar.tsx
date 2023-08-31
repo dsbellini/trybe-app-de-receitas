@@ -1,10 +1,12 @@
 import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Button, Form, FormGroup } from 'react-bootstrap';
 import { Revenue, SearchParams } from '../exportTypes/types';
 import { ServiceFood } from '../services';
 import { RevenueContext } from '../context/RevenuesContext';
+import './SearchBarCSS.css';
 
-export default function SearchI() {
+export default function SearchBar() {
   const INITIAL_SEARCH: SearchParams = {
     type: 's',
     term: '',
@@ -48,7 +50,9 @@ export default function SearchI() {
 
   return (
     <>
-      <div>
+      <FormGroup
+        className="search-radio-buttons"
+      >
         <label>
           <input
             checked={ searchParams.type === 'i' }
@@ -85,8 +89,9 @@ export default function SearchI() {
           />
           First letter
         </label>
-      </div>
-      <input
+
+      </FormGroup>
+      <Form.Control
         id="term"
         value={ searchParams.term }
         data-testid="search-input"
@@ -94,13 +99,17 @@ export default function SearchI() {
         placeholder="Buscar Receita"
         onChange={ handleChange }
       />
-      <button
-        type="button"
-        data-testid="exec-search-btn"
-        onClick={ handleClick }
-      >
-        Search
-      </button>
+      <div className="d-grid gap-2">
+        <Button
+          type="button"
+          variant="success"
+          data-testid="exec-search-btn"
+          onClick={ handleClick }
+          className="search-btn"
+        >
+          Search
+        </Button>
+      </div>
     </>
   );
 }

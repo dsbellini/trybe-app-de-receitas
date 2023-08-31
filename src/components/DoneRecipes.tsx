@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import shareIcon from '../images/shareIcon.svg';
 import { DoneReciepesType } from '../exportTypes/types';
-import Header from './Header';
+import Header from './Header/Header';
 
 function DoneRecipes() {
   const [doneRecipes, setDoneRecipes] = useState<DoneReciepesType[]>([]);
