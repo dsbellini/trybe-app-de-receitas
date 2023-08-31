@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'; // Importe o Link
 import { fetchApi } from '../../utils/fetchApi';
 import { DrinkRecipe, DataDrink, DataCategory } from '../../types';
+import Loading from '../LoadingPage/Loading';
 
 const URL = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
 const categoryURL = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list';
@@ -41,7 +42,7 @@ function PrincipalDrinkPage() {
     fetchDrink();
   }, []);
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <Loading />;
 
   return (
     <div>

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'; // teste de import
 import { fetchApi } from '../../utils/fetchApi';
 import { MealRecipe, DataMeal, DataCategory } from '../../types';
+import Loading from '../LoadingPage/Loading';
 
 const URL = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
 const categoryURL = 'https://www.themealdb.com/api/json/v1/1/list.php?c=list';
@@ -41,7 +42,7 @@ function PrincipalFoodPage() {
     fetchFood();
   }, []);
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <Loading />;
 
   return (
     <div>

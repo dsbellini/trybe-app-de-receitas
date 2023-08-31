@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import ProfileButton from './ProfileButton';
-import SearchButton from './SearchButton';
-import SearchI from './SearchBar';
+import ProfileButton from '../ProfileButton';
+import SearchButton from '../SearchButton';
+import SearchBar from '../SearchBar';
+import './style.css';
 
 type Heading = {
   pageTitle: string;
@@ -16,9 +17,10 @@ export default function Header({
 }: Heading) {
   const [searchOnly, setSearchOnly] = useState(false);
   return (
-    <>
+    <section className="header-section">
       <header>
         <ProfileButton />
+        <h1 data-testid="page-title">{ pageTitle }</h1>
         {searchIcon && (
           <SearchButton
             barVisible={ () => {
@@ -27,10 +29,9 @@ export default function Header({
             } }
           />
         )}
-        { searchOnly && <SearchI /> }
-        <h1 data-testid="page-title">{ pageTitle }</h1>
       </header>
+      { searchOnly && <SearchBar /> }
       <hr />
-    </>
+    </section>
   );
 }
