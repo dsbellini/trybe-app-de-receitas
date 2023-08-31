@@ -9,7 +9,7 @@ import Revenues from './components/Recipes';
 import RecipeDetails from './components/RecipeDetails/RecipeDetails';
 import Profile from './components/ProfilePage/Profile';
 import RecipeInProgress from './components/RecipeInProgress/RecipeInProgress';
-import DoneRecipes from './components/DoneRecipes';
+import DoneRecipes from './components/DoneRecipes/DoneRecipes';
 import FavoriteRecipes from './components/FavoriteRecipes/FavoriteRecipes';
 // import PrincipalFoodPage from './components/PrincipalFoodPage'; deixando assim por conta de não estar sendo usado
 // import PrincipalDrinkPage from './components/PrincipalDrinkPage';

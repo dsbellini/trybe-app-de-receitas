@@ -150,9 +150,17 @@ function RecipeInProgress() {
     checkFavorite();
   };
 
+  function formatDateString() {
+    const date = new Date();
+    const day = date.getDate().toString().padStart(2, '0');
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
+  }
+
   // Função para finalizar a receita e salvar no localStorage - aguardando a página anterior ficar pronta para finalizar
   const handleFinishClick = () => {
-    const date = new Date();
+    const date = formatDateString();
     const doneRecipes = {
       id: recipe?.idDrink || recipe?.idMeal,
       nationality: recipe?.strArea || '',

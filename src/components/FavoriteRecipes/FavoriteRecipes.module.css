@@ -1,9 +1,3 @@
-.button {
-  background-color: #849F27;
-  border-color: #849F27;
-  width: 100%;
-}
-
 .item {
   margin-top: 20px;
 }
@@ -21,4 +15,32 @@
   top: 85%;
   right: 36%;
   border-radius: 18px;
+}
+
+.btnAll {
+  background-color: #849f27;
+  border-color: #849f27;
+  border-radius: 5px;
+  color: white;
+  height: 8vh;
+  width: 100%;
+}
+
+.btnMeals {
+  background-color: #849f27;
+  border-color: #849f27;
+  border-radius: 5px;
+  color: white;
+  height: 8vh;
+  width: 100%;
+
+}
+
+.btnDrinks {
+  background-color: #849f27;
+  border-color: #849f27;
+  border-radius: 5px;
+  color: white;
+  height: 8vh;
+  width: 100%;
 }
