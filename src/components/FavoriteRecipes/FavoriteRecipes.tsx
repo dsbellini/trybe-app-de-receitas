@@ -1,9 +1,5 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import Header from '../Header/Header';
-import { FavoriteType } from '../../exportTypes/types';
-import shareIcon from '../../images/shareIcon.svg';
-import blackHeart from '../../images/blackHeartIcon.svg';
 import Container from 'react-bootstrap/Container';
 import Image from 'react-bootstrap/Image';
 import Row from 'react-bootstrap/Row';
@@ -11,6 +7,10 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Card from 'react-bootstrap/Card';
+import blackHeart from '../../images/blackHeartIcon.svg';
+import shareIcon from '../../images/shareIcon.svg';
+import { FavoriteType } from '../../exportTypes/types';
+import Header from '../Header/Header';
 import style from './FavoriteRecipes.module.css';
 
 function FavoriteRecipes() {
@@ -49,37 +49,37 @@ function FavoriteRecipes() {
 
   return (
     <div>
-        <Header
-          pageTitle="Favorite Recipes"
-          searchIcon={ false }
-        />
+      <Header
+        pageTitle="Favorite Recipes"
+        searchIcon={ false }
+      />
       <Row>
         <Col>
           <button
-            className={ style.button }
+            className={ style.btnAll }
             data-testid="filter-by-all-btn"
             onClick={ () => setFilteredType('') }
           >
             All
-          </button >
+          </button>
         </Col>
         <Col>
           <button
-            className={ style.button }
+            className={ style.btnMeals }
             data-testid="filter-by-all-btn"
             onClick={ () => setFilteredType('meal') }
           >
             Meals
-          </button >
+          </button>
         </Col>
         <Col>
           <button
-            className={ style.button }
+            className={ style.btnDrinks }
             data-testid="filter-by-all-btn"
             onClick={ () => setFilteredType('drink') }
           >
             Drinks
-          </button >
+          </button>
         </Col>
       </Row>
 
@@ -93,16 +93,16 @@ function FavoriteRecipes() {
         return true;
       })
         .map((recipe, index) => (
-          <Container className={ style.item } >
+          <Container key={ index } className={ style.item }>
             <Card
               className={ `${style.card} text-white text-center` }
-              style={{ width: '20rem' }}
+              style={ { width: '20rem' } }
             >
               <Link to={ `/${recipe.type}s/${recipe.id}` }>
                 <Card.Img variant="top" src={ recipe.image } />
               </Link>
               <Card.Body>
-                <Card.Title>              
+                <Card.Title>
                   {recipe.name}
                 </Card.Title>
                 <ButtonGroup>
@@ -122,21 +122,25 @@ function FavoriteRecipes() {
                   </Button>
                 </ButtonGroup>
               </Card.Body>
-              <Card.Footer className="text-muted">                  {recipe.type === 'meal'
-                    ? `${recipe.nationality} - ${recipe.category}`
-                    : `${recipe.alcoholicOrNot}`}</Card.Footer>
+              <Card.Footer className="text-muted">
+                {' '}
+                {recipe.type === 'meal'
+                  ? `${recipe.nationality} - ${recipe.category}`
+                  : `${recipe.alcoholicOrNot}`}
+
+              </Card.Footer>
             </Card>
           </Container>
 
         ))}
-      { copySuccess === true 
-          ?( 
-              <Button 
-                variant="light"
-                className={ style.copy }
-                >
-                  Link copied!
-              </Button>) : null }
+      { copySuccess === true
+        ? (
+          <Button
+            variant="light"
+            className={ style.copy }
+          >
+            Link copied!
+          </Button>) : null }
     </div>
   );
 }

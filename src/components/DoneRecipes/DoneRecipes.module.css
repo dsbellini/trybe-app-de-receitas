@@ -1,0 +1,62 @@
+  .button {
+    background-color: #849F27;
+    border-color: #849F27;
+    width: 100%;
+  }
+  
+  .item {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .card {
+    background-color: #849F27;
+  }
+  
+  .copy {
+    font-weight: bold;
+    position: fixed;
+    width:  130px;
+    height: 40px;
+    z-index: 2;
+    top: 85%;
+    right: 36%;
+    border-radius: 18px;
+  }
+
+  .btnCategory {
+    display: flex;
+    gap: 2%;
+    height: auto;
+    width: 100vw;
+  }
+  
+  .btnAll {
+    background-color: #849f27;
+    border-color: #849f27;
+    border-radius: 5px;
+    color: white;
+    height: 8vh;
+    width: 100%;
+  }
+  
+  .btnMeals {
+    background-color: #849f27;
+    border-color: #849f27;
+    border-radius: 5px;
+    color: white;
+    height: 8vh;
+    width: 100%;
+  
+  }
+  
+  .btnDrinks {
+    background-color: #849f27;
+    border-color: #849f27;
+    border-radius: 5px;
+    color: white;
+    height: 8vh;
+    width: 100%;
+  }
+  
