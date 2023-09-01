@@ -7,12 +7,12 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Card from 'react-bootstrap/Card';
+import { Alert } from 'react-bootstrap';
 import blackHeart from '../../images/blackHeartIcon.svg';
 import shareIcon from '../../images/shareIcon.svg';
 import { FavoriteType } from '../../exportTypes/types';
 import Header from '../Header/Header';
 import style from './FavoriteRecipes.module.css';
-import { Alert } from 'react-bootstrap';
 
 function FavoriteRecipes() {
   const [favorites, setFavorites] = useState<FavoriteType[]>([]);
@@ -136,9 +136,9 @@ function FavoriteRecipes() {
         ))}
       { copySuccess === true
         ? (
-            <div className={ style.copy }>
-              <Alert variant="success">Link copied!</Alert>
-            </div>) : null }
+          <div className={ style.copy }>
+            <Alert variant="success">Link copied!</Alert>
+          </div>) : null }
     </div>
   );
 }
