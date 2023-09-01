@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'; // teste de import
+import { Button, Card, Container } from 'react-bootstrap';
 import { fetchApi } from '../../utils/fetchApi';
 import { MealRecipe, DataMeal, DataCategory } from '../../types';
 import Loading from '../LoadingPage/Loading';
+import './styles.css';
 
 const URL = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
 const categoryURL = 'https://www.themealdb.com/api/json/v1/1/list.php?c=list';
@@ -46,46 +48,54 @@ function PrincipalFoodPage() {
 
   return (
     <div>
-      <h1>{isDrinkPage ? 'Receitas de bebidas' : 'Receitas de comidas'}</h1>
+      {/* <h1>{isDrinkPage ? 'Receitas de bebidas' : 'Receitas de comidas'}</h1> */}
 
-      <nav>
+      <nav className="filter-btns">
         {category.map((item, index) => (
           index < 5 && (
-            <button
+            <Button
               key={ index }
               value={ item.strCategory }
               onClick={ () => handleCategoryFilter(item.strCategory) }
               data-testid={ `${item.strCategory}-category-filter` }
+              className="btn-filter"
             >
               {item.strCategory}
-            </button>
+            </Button>
           )
         ))}
 
-        <button
+        <Button
           onClick={ () => handleCategoryFilter('') }
           data-testid="All-category-filter"
+          className="btn-filter"
+
         >
           {filterActive ? 'All' : 'Limpar Filtro'}
-        </button>
+        </Button>
       </nav>
 
       {food.map((item, index) => (
         index < 12 && (
-          <Link
-            to={ `/meals/${item.idMeal}` }
-            key={ item.idMeal }
-          >
-            <div
-              data-testid={ `${index}-recipe-card` }
-            >
-              <img
-                src={ item.strMealThumb }
-                alt={ item.strMeal }
-                data-testid={ `${index}-card-img` }
-              />
-              <h2 data-testid={ `${index}-card-name` }>{item.strMeal}</h2>
-            </div>
+          <Link to={ `/meals/${item.idMeal}` } key={ item.idMeal }>
+            <Container className="card-container">
+              <Card className="card">
+                <Card.Img
+                  src={ item.strMealThumb }
+                  alt={ item.strMeal }
+                  data-testid={ `${index}-card-img` }
+                  className="card-img"
+                />
+                <Card.Body>
+                  <Card.Title
+                    data-testid={ `${index}-card-name` }
+                  >
+                    {item.strMeal}
+
+                  </Card.Title>
+                </Card.Body>
+              </Card>
+            </Container>
           </Link>
         )
       ))}

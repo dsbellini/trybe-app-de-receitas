@@ -1,0 +1,36 @@
+a {
+    text-decoration: none;
+}
+
+.card-container {
+    display: flex;
+    margin-top: 10px
+}
+
+.card {
+    background-color: #849F27;
+    color: white;
+    padding: 5px;
+    text-align: center;
+  }
+
+  .filter-btns {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 5px;
+    margin: 20px 10px;
+  }
+
+  .btn-filter {
+    background-color: #849F27;
+    border: none;
+    border-radius: 5px;
+    margin: 0.2rem;
+  }
+
+  .btn-filter:hover {
+    background-color: #536318;
+    border: none;
+    color: white;
+  }
