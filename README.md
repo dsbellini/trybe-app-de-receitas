@@ -11,7 +11,9 @@ Além disso, fui o responsável por criar a logo e o nome do " aplicativo ", al�
 No que diz respeito ao projeto e seus componentes, fui responsável pelas seguintes páginas/componentes:
 
 1 - Login
+<br/>
 2 - Perfil
+<br/>
 3 - Receita em progresso
 
 Neste repositório é possível visualizar o código, e neste link é possivel visualizar o deploy: https://cookfy.surge.sh. Lembro que esse app foi desenvolvido como mobile, portanto é necessário visualiza-lo pelo celular ou redimensionar o navegador.
